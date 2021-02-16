@@ -1,0 +1,135 @@
+{info: {…}, content: {…}}
+content:
+1:
+artist: "Olivia Rodrigo"
+detail: "same"
+last week: "1"
+peak position: "1"
+rank: "1"
+title: "Drivers License"
+weeks at no.1: "4"
+weeks on chart: "4"
+__proto__: Object
+2:
+artist: "24kGoldn Featuring iann dior"
+detail: "same"
+last week: "2"
+peak position: "1"
+rank: "2"
+title: "Mood"
+weeks on chart: "26"
+__proto__: Object
+3:
+artist: "The Weeknd"
+detail: "same"
+last week: "3"
+peak position: "1"
+rank: "3"
+title: "Blinding Lights"
+weeks on chart: "61"
+__proto__: Object
+4:
+artist: "Ariana Grande"
+detail: "same"
+last week: "4"
+peak position: "2"
+rank: "4"
+title: "34+35"
+weeks on chart: "14"
+__proto__: Object
+5:
+artist: "Dua Lipa Featuring DaBaby"
+detail: "same"
+last week: "5"
+peak position: "5"
+rank: "5"
+title: "Levitating"
+weeks on chart: "18"
+__proto__: Object
+6:
+artist: "Chris Brown & Young Thug"
+detail: "same"
+last week: "6"
+peak position: "5"
+rank: "6"
+title: "Go Crazy"
+weeks on chart: "39"
+__proto__: Object
+7:
+artist: "Ariana Grande"
+detail: "same"
+last week: "7"
+peak position: "1"
+rank: "7"
+title: "Positions"
+weeks on chart: "15"
+__proto__: Object
+8:
+artist: "The Weeknd"
+detail: "up"
+last week: "14"
+peak position: "8"
+rank: "8"
+title: "Save Your Tears"
+weeks on chart: "8"
+__proto__: Object
+9:
+artist: "Justin Bieber Featuring Chance The Rapper"
+detail: "down"
+last week: "8"
+peak position: "3"
+rank: "9"
+title: "Holy"
+weeks on chart: "20"
+__proto__: Object
+10:
+artist: "CJ"
+detail: "up"
+last week: "16"
+peak position: "10"
+rank: "10"
+title: "Whoopty"
+weeks on chart: "13"
+__proto__: Object
+__proto__: Object
+info:
+category: "Billboard"
+chart: "HOT 100"
+date: "2021-02-13"
+source: "Billboard-API"
+__proto__: Object
+__proto__: Object
+
+
+
+Pick two songs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Get both mp3
+
+Change the tempo of one or each to match bpms
+
+Find the key of each 
+
+Transpose both to match
+
+have 2 new audio files 
+
+one will keep its lower frequencies and the other will keep its highs.
+
+Play 
