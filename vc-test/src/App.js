@@ -1,20 +1,29 @@
-import React from 'react'
+import React from "react";
 import "./App.css";
-import { Switch, Route, Link } from 'react-router-dom'
-// import TestBillboard from "./Components/TestBillboard.js";
-import Home from './Components/Home.js'
+import { Switch, Route } from "react-router-dom";
+
+import Home from "./Components/Home.js";
 import TestAudio from "./Components/TestAudio.js";
-import SongList from './Components/SongList.js'
+import TestApiSpo from "./Components/TestApiSpo.js";
 
 function App() {
   return (
     <div className="App">
-      {/* <TestAudio /> */}
+      {/* <TestAudio />
+      Convert audio to different key */}
 
       <Switch>
         <Route exact path="/" render={(props) => <Home {...props} />} />
-        <Route exact path="/TestAudio" render={(props) => <TestAudio {...props} />} />
-        <Route exact path="/SongList" render={(props) => <SongList {...props} />} />
+        <Route
+          exact
+          path="/TestAudio"
+          render={(props) => <TestAudio {...props} />}
+        />
+        <Route
+          exact
+          path="/TestApiSpo"
+          render={(props) => <TestApiSpo {...props} />}
+        />
       </Switch>
     </div>
   );
