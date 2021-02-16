@@ -28,11 +28,12 @@ function SongList(props) {
         return songs.map(eachSong => {
           return (
             <li key={eachSong.id} className="track-bar">
-              <img src={eachSong.album.cover} />
+                <img src={eachSong.album.cover} />            
                 <div>
                     <h5>{eachSong.title}</h5>
                     <audio controls className="audio-bar">
                         <source src={eachSong.preview} />
+                        <button >Play</button>
                     </audio>
                 </div>
             </li>
@@ -52,3 +53,13 @@ function SongList(props) {
 }
 
 export default SongList;
+
+{/* <li key={eachSong.id} className="track-bar">
+<img src={eachSong.album.cover} />
+  <div>
+      <h5>{eachSong.title}</h5>
+      <audio controls className="audio-bar">
+          <source src={eachSong.preview} />
+      </audio>
+  </div>
+</li> */}

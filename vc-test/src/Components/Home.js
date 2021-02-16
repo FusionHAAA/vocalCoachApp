@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route, Link } from 'react-router-dom'
-import SongList from './SongList.js'
+import album1 from '../images/jcole-album.jpg'
+import album2 from '../images/hozier-album.jpg'
 
 function Home(props) {
     return (
-        <div>
-            <div>
-                <Link to="/TestAudio">
-                    Test Audio
-                </Link>
+        <div className="Home">
+            <div className="hero-image">
+                <div className="album-cover cover-2">
+                    <img src={album2} alt="" className="album-2"/>
+                </div>
+                <div className="album-cover cover-1">
+                    <img src={album1} alt="" className="album-1"/>
+                </div>
             </div>
-            <SongList />
+
+            <h1>Welcome to Muse</h1>
         </div>
     );
 }
