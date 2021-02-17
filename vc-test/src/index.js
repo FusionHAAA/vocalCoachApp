@@ -10,13 +10,10 @@ import token from "./Components/Token.js";
 console.log(token());
 
 ReactDOM.render(
-  <SpotifyApiAxiosContext.Provider value={axios}>
-    <SpotifyApiContext.Provider value={token()}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </SpotifyApiContext.Provider>
-  </SpotifyApiAxiosContext.Provider>,
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+
   document.getElementById("root")
 );
 
