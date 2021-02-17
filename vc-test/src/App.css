@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+}
+.App {
+  padding: 2%;
+  background-image: linear-gradient(rgb(253, 85, 85), rgb(148, 66, 214), rgb(4, 71, 255));
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.controls {
+  display:flex;
+  justify-content: space-between;
+}
+.buttons {
+  margin: 30px;
+}
+.music-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.song-box {
+  width: 90vw;
+  height: 36vh;
+  overflow-y: auto;
+  background: rgba(2, 37, 2, 0.452)
+}
+.track-bar {
+  display: flex;
+  padding: 1%;
+  color: white;
+  height: 8vh;
+}
+.track-bar img {
+  width: 20%;
+  object-fit: contain;
+}
+.audio-bar {
+  width: 70vw;
+  border-radius: 0px;
+}
+
+.chooseSong {
+  background: red
+}
+/* ---nav bar--- */
+
+/* ---home page--- */
+.Home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+.hero-image {
+  width: 90vw;
+  height: 45vh;
+  position: relative;
+  
+}
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.album-cover {
+  width: 55vw;
+  height: 30vh;
+  border: 1px solid rgba(0, 0, 0, 0);
+  box-shadow: -5px 4px 20px 1px rgba(0, 0, 0, 0.575)
+}
+.cover-1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.cover-2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  }

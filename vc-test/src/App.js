@@ -5,30 +5,7 @@ import Home from "./Components/Home.js";
 import TestAudio from "./Components/TestAudio.js";
 import TestApiSpo from "./Components/TestApiSpo.js";
 import token from "./Components/Token.js";
-// console.log(t);
-// const headers = {
-//   headers: {
-//     Accept: "application/json",
-//     "Content-Type": "application/x-www-form-urlencoded",
-//   },
-//   auth: {
-//     username: clientId,
-//     password: clientSecret,
-//   },
-// };
-// axios.get('https://api.spotify.com/v1/search?q=beatles', {
-//   headers: Authorization
-// }).then(res => {
-//   console.log(res)
-// })
-// fetch(`https://api.spotify.com/v1/search?q=${artist}&type=artist`, {
-//   headers: {
-//     Accept: "application/json",
-//     Authorization: "Bearer BQBYht1XLd9rY4yltENDBQtXA5VSqmaM0XrRs3CFscXdrfyYWM4F8ps3zCeJYL3TSRPGJfJsu7gIbzQyJIlAep_EDVntcdePVO5l7P3y_vlbOALWh3xBAagAJR6YUvlZet953nxg3cdOE4biTZdOQt8",
-//     "Content-Type": "application/json"
-//   }
-// }).then(res => res.json())
-//   .then(data => console.log(data))
+//
 function App() {
   let [artist, setArtist] = useState("beatles");
   let [artists, setArtists] = useState([]);
