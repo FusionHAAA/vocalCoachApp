@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Switch, Route, Link } from 'react-router-dom'
 import album1 from '../images/jcole-album.jpg'
 import album2 from '../images/hozier-album.jpg'
+import TestAudio from './TestAudio.js'
+import TestApiSpo from './TestApiSpo.js'
 
 function Home(props) {
     return (
@@ -16,6 +18,10 @@ function Home(props) {
             </div>
 
             <h1>Welcome to Muse</h1>
+            <div>
+                <Link to="/TestAudio">Test Audio</Link>
+                <Link to="/TestApiSpo">Test Spotify</Link>
+            </div>
         </div>
     );
 }

@@ -15,9 +15,9 @@ function NavBar(props) {
                 </Link>
             </div>
             <div>
-                <Link to="/SongList">
+                {/* <Link to="/SongList">
                     About
-                </Link>
+                </Link> */}
             </div>
         </nav>
     );
