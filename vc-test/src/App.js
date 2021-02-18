@@ -7,29 +7,34 @@ import TestAudio from "./Components/TestAudio.js";
 import ChooseSong from './Components/ChooseSong.js'
 import ScrollAnimation from 'react-animate-on-scroll'
 import "animate.css/animate.min.css";
-
-// import SongList from './Components/SongList.js'
-// import TestApiSpo from "./Components/TestApiSpo.js";
-// import token from "./Components/Token.js";
-//
+import TestApiSpo from "./Components/TestApiSpo.js";
+import TestBpm from "./Components/TestBpm.js";
+import token from "./Components/Token.js";
+// let t = token();
+// console.log(t)
 function App() {
-  // let [artist, setArtist] = useState("beatles");
-  // let [artists, setArtists] = useState([]);
-  // useEffect(() => {
-  //   fetch(`https://api.spotify.com/v1/search?q=${artist}&type=artist`, {
-  //     headers: {
-  //       Accept: "application/json",
-  //       Authorization: `Bearer ${token()}`,
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setArtist(data.artists);
-  //     });
-  // }, []);
+  let [artist, setArtist] = useState("beatles");
+  let [artists, setArtists] = useState([]);
 
+  useEffect(() => {
+   getSpotifyData();
+  }, []);
+
+
+  async function getSpotifyData() {
+    fetch(`https://api.spotify.com/v1/search?q=beatles&type=artist&limit=5`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${await token()}`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(data);
+        setArtist(data.artists);
+      });
+  }
 
   return (
     <div className="App">
@@ -39,16 +44,12 @@ function App() {
       <Switch>
         <Route exact path="/" render={(props) => <Home {...props} />} />
         <Route exact path="/ChooseSong" render={(props) => <ChooseSong {...props} />} />
-        {/* <Route
+        <Route
           exact
           path="/TestAudio"
           render={(props) => <TestAudio {...props} />}
         />
-        <Route
-          exact
-          path="/TestApiSpo"
-          render={(props) => <TestApiSpo {...props} />}
-        /> */}
+        
       </Switch>
     </div>
   );

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import album1 from "../images/jcole-album.jpg";
 import album2 from "../images/hozier-album.jpg";
+import BeatDetectorTest from "./BeatDetectorTest";
 import album3 from '../images/doja-album.jpg'
 import album4 from '../images/bob-dylan-album.jpg'
 import album5 from '../images/billie-eilish-album.jpg'
@@ -52,10 +53,11 @@ function Home(props) {
           </div>
       </div>
       <div>
-        {/* <Link to="/TestAudio">Test Audio</Link>
-        <Link to="/TestApiSpo">Test Spotify</Link> */}
+      
       </div>
+     
     </div>
+
   );
 }
 
