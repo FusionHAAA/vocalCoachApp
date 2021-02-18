@@ -51,7 +51,7 @@ function TestAudio(props) {
     var gRover = 0;
     var AudioContext = window.AudioContext;
     var audioCtx = new AudioContext();
-    var offlineCtx= new OfflineAudioContext(1,44100*4,44100);
+    // var offlineCtx= new OfflineAudioContext(1,44100*4,44100);
     
 //immediately grab audio on load 
 //transpose

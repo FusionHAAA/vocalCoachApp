@@ -31,20 +31,3 @@ function ChooseSong(props) {
 
 export default ChooseSong;
 
-      
-{/* <div className="song-box one">
-    <form className="search-box">
-        <input type="text" id="search" placeholder="Find a song"></input>
-    </form>
-    <div className="choose-song-list">
-        <SongList />
-    </div>
-</div>
-<div className="song-box two">
-    <form className="search-box">
-        <input type="text" id="search" placeholder="Find a song"></input>
-    </form>
-    <div className="choose-song-list">
-        <SongList />
-    </div>
-</div> */}
