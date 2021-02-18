@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
-
 * {
   margin: 0;
   font-family: 'Raleway', sans-serif;
@@ -9,7 +8,6 @@ html {
   background-attachment: fixed;
   height: 100%;
   width: 100%;
-
 }
 .App {
   padding: 2%;
@@ -181,6 +179,9 @@ nav a:hover:before, nav a:hover:after {
   left: 55%;
   transform: translate(-50%, -50%)
 }
+#pba-two {
+  opacity: 0;
+}
 .song-details {
   position: absolute;
   background: rgba(43, 1, 78, 0.705);
@@ -207,29 +208,23 @@ nav a:hover:before, nav a:hover:after {
 
 /* ---choose song--- */
 .chooseSong {
-  margin-top: 14%;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   align-items: center;
 }
 .chooseSong h1 {
   color: white;
-  margin-bottom: 7%;
+  margin-bottom: 5%;
+  margin-top: 13%
 }
 .container-choose {
-  height: 61vh;
+  height: 59vh;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   text-align: center;
 }
-/* .choose-song-list {
-  width: 85vw;
-  height: 25vh;
-  overflow-y: auto;
-  border: 2px solid white;
-} */
 .track-bar {
   display: flex;
   justify-content: space-between;
@@ -244,8 +239,11 @@ nav a:hover:before, nav a:hover:after {
 .titles {
   width: 50%;
 }
-.titles h6 {
-  font-weight: normal;
+.titles p {
+  margin: 0;
+  font-size: 12px;
+  width: 100%;
+  height: 100%;
 }
 .track-bar img {
   width: 14%;
@@ -285,3 +283,48 @@ form.search-box {
 .control-buttons {
   margin-right: 2%;
 }
+.song-choices {
+  display: flex;
+  color: white;
+  margin-top: 5%;
+  width: 90%;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.song-choices img {
+  width: 12vw;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+.choice-one {
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+}
+.choice-two {
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+}
+li:focus {
+  background: rgba(0, 255, 34, 0.438);
+  outline: none !important;
+  transform: scale(1.1);
+  border: 2px solid white;
+  height: 7vh;
+}
+/* .choose-song-list li:active {
+  background: blue;
+  /* animation: selected .1s ease-in forwards; */
+/* @keyframes selected {
+  from {
+    background: blue;
+  }
+  to {
+    background: red;
+  }
+} */
