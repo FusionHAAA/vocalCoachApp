@@ -4,6 +4,11 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./Components/Home.js";
 import NavBar from "./Components/NavBar.js"
 import TestAudio from "./Components/TestAudio.js";
+import ChooseSong from './Components/ChooseSong.js'
+import ScrollAnimation from 'react-animate-on-scroll'
+import "animate.css/animate.min.css";
+
+// import SongList from './Components/SongList.js'
 // import TestApiSpo from "./Components/TestApiSpo.js";
 // import token from "./Components/Token.js";
 //
@@ -25,6 +30,7 @@ function App() {
   //     });
   // }, []);
 
+
   return (
     <div className="App">
       {/* <TestAudio />
@@ -32,6 +38,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path="/" render={(props) => <Home {...props} />} />
+        <Route exact path="/ChooseSong" render={(props) => <ChooseSong {...props} />} />
         {/* <Route
           exact
           path="/TestAudio"
