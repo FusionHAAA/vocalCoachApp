@@ -3,21 +3,21 @@ import { Link } from 'react-router-dom'
 
 function NavBar(props) {
     return (
-        <nav>
-            <div>
-                <Link to="/TestAudio">
-                    Test Audio
+        <nav className="container textIn">
+            <div className="nav-links">
+                <Link to="/" alt="Home">
+                    <b>Home</b>
                 </Link>
             </div>
-            <div>
-                <Link to="/ChooseSong">
-                    Choose Song
+            <div className="nav-links">
+                <Link to="/TestAudio" alt="Test Audio">
+                    <b>Test Audio</b>
                 </Link>
             </div>
-            <div>
-                {/* <Link to="/SongList">
-                    About
-                </Link> */}
+            <div className="nav-links">
+                <Link to="/ChooseSong" alt="Choose Song">
+                    <b>Choose Song</b>
+                </Link>
             </div>
         </nav>
     );

@@ -67,7 +67,7 @@ function TestAudio(props) {
       
       var request = new XMLHttpRequest();
       //console.log('sent request')
-        request.open('GET',holder,true)
+        request.open('GET',"https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-8.mp3",true)
       
         request.responseType = 'arraybuffer';
 

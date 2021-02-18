@@ -1,5 +1,53 @@
 
+function createBuffers(url) {
 
+  // Fetch Audio Track via AJAX with URL
+  var request = new XMLHttpRequest();
+ 
+  request.open('GET', url, true);
+  request.responseType = 'arraybuffer';
+ 
+  request.onload = function(ajaxResponseBuffer) {
+ 
+     // Create and Save Original Buffer Audio Context in 'originalBuffer'
+     var audioCtx = new AudioContext();
+     var songLength = ajaxResponseBuffer.total;
+ 
+     // Arguments: Channels, Length, Sample Rate
+     var offlineCtx = new OfflineAudioContext(1, songLength, 44100);
+     var audioData = request.response;
+     audioCtx.decodeAudioData(audioData, function(buffer) {
+ 
+          window.originalBuffer = buffer.getChannelData(0);
+          var beatSample = offlineCtx.createBufferSource();
+          beatSample.buffer = buffer;
+ 
+          // Create a Low Pass Filter to Isolate Low End Beat
+          var filter = offlineCtx.createBiquadFilter();
+          filter.type = "lowpass";
+          filter.frequency.value = 140;
+          beatSample.connect(filter);
+          filter.connect(offlineCtx.destination);
+ 
+             // Render this low pass filter data to new Audio Context and Save in 'lowPassBuffer'
+             offlineCtx.startRendering().then(function(lowPassAudioBuffer) {
+ 
+              var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+              var song = audioCtx.createBufferSource();
+              song.buffer = lowPassAudioBuffer;
+              song.connect(audioCtx.destination);
+ 
+              // Save lowPassBuffer in Global Array
+              window.lowPassBuffer = song.buffer.getChannelData(0);
+              console.log("Low Pass Buffer Rendered!");
+             });
+ 
+         },
+         function(e) {});
+  }
+  request.send();
+ }
+ 
 
 function getClip(length, startTime, data) {
 
