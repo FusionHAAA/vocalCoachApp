@@ -29,10 +29,14 @@ function Home(props) {
         </div>
         <div className="border-box"></div>
         <div className="text-box" id="hook">
-            <p>Have you ever wondered what your favorite pop princess would 
+            <p>Have you ever wondered what today's pop princess would 
                sound like over your favorite track from RapCaviar?</p>
-            <p>Or perhaps you'd like to hear Harry Styles belt it over 
+            <p>Or perhaps you'd like to hear Harry Styles belt it out over 
                 the thumping bass hits of Billie Eilish?
+            </p>
+            <p>
+              Then you've got to try <span style={{color: 'rgb(253, 85, 85)', fontSize: '18px'}}>
+              <b>Muse</b></span>!
             </p>
         </div>
         <div className="border-box"></div>
