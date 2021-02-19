@@ -23,49 +23,14 @@ function TestAudio(props) {
   //  }, []);
  
  
-   async function getSpotifyAnalysis(id,num) {
-     fetch(`https://api.spotify.com/v1/audio-analysis/${id}`, {
-       headers: {
-         Accept: "application/json",
-         Authorization: `Bearer ${await token()}`,
-         "Content-Type": "application/json"
-       }
-     })
-       .then((res) => res.json())
-       .then((data) => {
-        console.log(data)
-        if(num===1){
-        setFirstAnalysis({
-          bpm: data.track.tempo,
-          key: data.track.key
-        })
-      }else{
-        setSecondAnalysis({
-          bpm: data.track.tempo,
-          key: data.track.key
-        })
-      }
-     
-        //  setHolder(data.tracks.items[0].preview_url);
-        //  loadSecond("https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-8.mp3")
-       });
-   }
-
-  function getMusicAnalysis(){
-    let useId1 = props.songIdOne.id
-    let useId2 = props.songIdTwo.id
-
-    getSpotifyAnalysis(useId1,1)
-    getSpotifyAnalysis(useId2,2)
-   
-  }
+ 
   
  
 
   const demonMagic = () => {
     //////
-    getMusicAnalysis();
-
+   
+    document.getElementById('transpose').innerHTML = '...loading'
 
 
     const MAX_FRAME_LENGTH = 16000;
@@ -582,6 +547,7 @@ function getPeaks(data) {
   }
 
   const loadFirst = (x)=> {
+    document.getElementById('transpose').innerHTML= 'READY'
     setConvertFirstSong(x)
     
   }
@@ -615,8 +581,8 @@ function getPeaks(data) {
   return (
     <div id="wrapper">
       {/* <p>PitchShift factor value -12 through 12</p> */}
-      <input id="shiftAmount" type="text" defaultValue="0" />
-      <button className="transpose" onClick={demonMagic}>
+      <input id="shiftAmount" type="text" defaultValue="0" style={{display:'none'}}/>
+      <button className="transpose" onClick={demonMagic} id="transpose">
        Transpose
       </button>
   
@@ -629,7 +595,6 @@ function getPeaks(data) {
       <button onClick={playBoth}>PLAY</button>
       <button onClick={pauseBoth}>PAUSE</button>
       <button onClick={stopBoth}>STOP</button>
-      <button onClick={console.log(firstAnalysis,secondAnalysis)}>log info</button>
       </div>
       
     </div>
