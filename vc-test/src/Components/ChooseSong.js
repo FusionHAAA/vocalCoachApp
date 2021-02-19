@@ -42,12 +42,12 @@ function ChooseSong(props) {
                 <SongList num={1}
                     displayChoice = {displayChoice}
                     id = 'song-list-one'
-                    selectKey = "Choose Song #1:"
+                    selectKey = "Pick Song #1:"
                     />
                 <SongList num={2}
                     displayChoice = {displayChoice}
                     id = 'song-list-two'
-                    selectKey = "Choose Song #2:"
+                    selectKey = "Pick Song #2:"
                     />
             </div>
 
@@ -76,7 +76,6 @@ function ChooseSong(props) {
                     </div>
                 </div>
             </div>
-
 
             <div className="example-container">
                 <Link to="/TestAudio">

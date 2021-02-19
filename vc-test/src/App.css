@@ -188,7 +188,6 @@ nav a:hover:before, nav a:hover:after {
 
 .fas {
   font-size: 10vw;
-  color: rgb(255, 255, 255);
   border-radius: 100%;
 }
 #pba-two {
@@ -272,16 +271,23 @@ nav a:hover:before, nav a:hover:after {
 form.search-box {
   margin-bottom: 2%;
 }
-#search {
+.search {
   height: 3vh;
-  width: 50vw;
+  width: 48vw;
   border-radius: 15px;
   border: 3px solid rgb(55, 55, 206);
+  position: relative;
+}
+.fa-search {
+  position: absolute;
+  font-size: 50%;
 }
 .search-field-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 90%;
+  margin: auto;
   color: white;
 }
 .search-field-container h4 {

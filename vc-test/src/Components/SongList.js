@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback, useOnScreen } from "re
 import axios from "axios";
 import { useInView } from 'react-intersection-observer'
 import token from './Token.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function SongList(props) {
   const [songs, setSongs] = useState([]);
@@ -66,18 +67,18 @@ function SongList(props) {
               <div className="control-buttons">
                 <i className="fas fa-play-circle" id={eachSong.preview_url}
                    onClick={() => {
-                    if (document.getElementById(`${eachSong.name}`).paused) {
-                      document.getElementById(`${eachSong.name}`).play()
+                    if (document.getElementById(`${eachSong.id}`).paused) {
+                      document.getElementById(`${eachSong.id}`).play()
                       document.getElementById(`${eachSong.preview_url}`).setAttribute('class', 'fas fa-pause-circle')
                     }
                     else {
-                      document.getElementById(`${eachSong.name}`).pause()
+                      document.getElementById(`${eachSong.id}`).pause()
                       document.getElementById(`${eachSong.preview_url}`).setAttribute('class', 'fas fa-play-circle')
                     }
                   }}>
                 </i>
               </div>
-              <audio className="audio-bar" id={eachSong.name}>
+              <audio className="audio-bar" id={eachSong.id}>
                 <source src={eachSong.preview_url} />
               </audio>
           </li>
@@ -93,13 +94,14 @@ function SongList(props) {
         <h4>{props.selectKey}</h4>
         <form className="search-box" onSubmit={findSong}>
             <input type="text" 
-                  id="search" 
+                  className="search" 
                   value={search}
-                  placeholder="Find favorite artist" 
+                  placeholder= 'Find favorite artist'
                   onChange={(e) => {
                     setSong(e.target.value)
                     setSearch(e.target.value)}}
                   />
+            <i class="fas fa-search"></i>
         </form>
       </div>
       <div className="choose-song-list" id={props.id} style={albumBackground}>
