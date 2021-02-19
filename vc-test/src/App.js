@@ -5,8 +5,6 @@ import Home from "./Components/Home.js";
 import NavBar from "./Components/NavBar.js"
 import TestAudio from "./Components/TestAudio.js";
 import ChooseSong from './Components/ChooseSong.js'
-import ScrollAnimation from 'react-animate-on-scroll'
-import "animate.css/animate.min.css";
 import TestApiSpo from "./Components/TestApiSpo.js";
 import TestBpm from "./Components/TestBpm.js";
 import token from "./Components/Token.js";
