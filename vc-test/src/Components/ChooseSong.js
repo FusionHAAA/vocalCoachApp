@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 import SongList from './SongList.js'
 import TestAudio from './TestAudio.js'
-import { useInView } from 'react-intersection-observer'
+
   // const [artist1, setArtist1] = useState()
     // const [title1, setTitle1] = useState('pick a song')
     // const [albumArt1, setAlbumArt1] = useState()
@@ -29,17 +29,21 @@ function ChooseSong(props) {
     let [albumArt2, setAlbumArt2] = useState()
     let [processSong1,setProcessSong1] = useState();
     let [processSong2,setProcessSong2] = useState();
+    let [songId1,setSongId1] = useState();
+    let [songId2,setSongId2] = useState();
 
     const displayChoice = (x, num) => {
         if (num == 1) {
             setName(x.name)
             setAlbumArt(x.album.images[1].url)
             setProcessSong1(x.preview_url)
+            setSongId1(x)
         }
         else {
             setName2(x.name)
             setAlbumArt2(x.album.images[1].url)
             setProcessSong2(x.preview_url)
+            setSongId2(x)
         }
       }
 
@@ -74,6 +78,8 @@ function ChooseSong(props) {
                     <TestAudio 
                         songOne = {processSong1}
                         songTwo = {processSong2}
+                        songIdOne={songId1}
+                        songIdTwo={songId2}
                         />
                 </div>
                 <div className="choice-two">

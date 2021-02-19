@@ -31,7 +31,7 @@ function SongList(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-    console.log(data.tracks.items)
+   
         setSongs(data.tracks.items)
         setBackgroundAlbum(data.tracks.items[0].album.images[0].url)
        //  loadSecond("https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-8.mp3")
@@ -65,7 +65,7 @@ function SongList(props) {
                 }}>
             <img src={eachSong.album.images[1].url} />
               <div className="titles">
-                {console.log(inView)}
+                {/* {console.log(inView)} */}
                 <p><b>{eachSong.name}</b> - {eachSong.name}</p>
                 <p>{eachSong.album.name}</p>
               </div>
