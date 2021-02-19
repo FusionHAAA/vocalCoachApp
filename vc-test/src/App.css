@@ -177,11 +177,6 @@ nav a:hover:before, nav a:hover:after {
   width: 20vw;
   height: 10vh;
 }
-.fas {
-  font-size: 10vw;
-  color: rgb(255, 255, 255);
-  border-radius: 100%;
-}
 .fa-play {
   color: rgb(4, 71, 255);
   font-size: 30px;
@@ -189,6 +184,12 @@ nav a:hover:before, nav a:hover:after {
   top: 50%;
   left: 55%;
   transform: translate(-50%, -50%)
+}
+
+.fas {
+  font-size: 10vw;
+  color: rgb(255, 255, 255);
+  border-radius: 100%;
 }
 #pba-two {
   opacity: 0;

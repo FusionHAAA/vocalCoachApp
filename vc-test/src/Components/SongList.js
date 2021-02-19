@@ -3,14 +3,13 @@ import axios from "axios";
 import { useInView } from 'react-intersection-observer'
 import token from './Token.js';
 
-//https://cors-anywhere.herokuapp.com
-
 function SongList(props) {
   const [songs, setSongs] = useState([]);
   const [song, setSong] = useState('doja cat');
   const [covers, setCovers] = useState('')
   const [backgroundAlbum, setBackgroundAlbum] = useState()
   const [search, setSearch] = useState('')
+  const [playSong, setPlaySong] = useState()
 
   const { ref, inView, entry } = useInView({
     root: document.querySelector('#song-list-one'),
@@ -49,12 +48,7 @@ function SongList(props) {
   const showSongs = () => {
     return songs.map((eachSong) => {
       albumCovers.push(eachSong.album.images[1].url)
-      return (
-        // <ScrollAnimation 
-        //   animateIn='pulse'
-        //   initiallyVisible={true}
-        //   scrollableParentSelector='#choose-song-id'
-        //   animatePreScroll={false}>   
+      return ( 
           <li ref={ref}
               key={eachSong.id} 
               className="track-bar" 
@@ -66,18 +60,27 @@ function SongList(props) {
             <img src={eachSong.album.images[1].url} />
               <div className="titles">
                 {console.log(inView)}
-                <p><b>{eachSong.name}</b> - {eachSong.name}</p>
+                <p><b>{eachSong.artists[0].name}</b> - {eachSong.name}</p>
                 <p>{eachSong.album.name}</p>
               </div>
               <div className="control-buttons">
-                <i className="fas fa-play-circle"></i>
-                {/* <i className="fas fa-pause-circle"></i> */}
+                <i className="fas fa-play-circle" id={eachSong.preview_url}
+                   onClick={() => {
+                    if (document.getElementById(`${eachSong.name}`).paused) {
+                      document.getElementById(`${eachSong.name}`).play()
+                      document.getElementById(`${eachSong.preview_url}`).setAttribute('class', 'fas fa-pause-circle')
+                    }
+                    else {
+                      document.getElementById(`${eachSong.name}`).pause()
+                      document.getElementById(`${eachSong.preview_url}`).setAttribute('class', 'fas fa-play-circle')
+                    }
+                  }}>
+                </i>
               </div>
-              <audio className="audio-bar">
+              <audio className="audio-bar" id={eachSong.name}>
                 <source src={eachSong.preview_url} />
               </audio>
           </li>
-        // </ScrollAnimation>
       );
     })
   };
