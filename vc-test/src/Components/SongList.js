@@ -21,9 +21,8 @@ function SongList(props) {
     findTheSong();
   }, []);
 
-  
   async function findTheSong (){
-    fetch(`https://api.spotify.com/v1/search?q=${song}&type=track&limit=10`, {
+    fetch(`https://api.spotify.com/v1/search?q=${song}&type=track&limit=15`, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${await token()}`,
@@ -39,21 +38,16 @@ function SongList(props) {
       });
   }
  
-
   const findSong = (e) => {
     e.preventDefault()
     findTheSong()
     setSearch('')
   }
 
-  
-
-
   let albumCovers = []
 
   const showSongs = () => {
-    const size = 6
-    const firstSix = songs.slice(0, size).map((eachSong) => {
+    return songs.map((eachSong) => {
       albumCovers.push(eachSong.album.images[1].url)
       return (
         // <ScrollAnimation 
@@ -86,7 +80,6 @@ function SongList(props) {
         // </ScrollAnimation>
       );
     })
-    return firstSix
   };
   let albumBackground = {
     backgroundImage: `url(${backgroundAlbum})`,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 import SongList from './SongList.js'
+import TestAudio from './TestAudio.js'
 import { useInView } from 'react-intersection-observer'
   // const [artist1, setArtist1] = useState()
     // const [title1, setTitle1] = useState('pick a song')
@@ -33,12 +34,12 @@ function ChooseSong(props) {
         if (num == 1) {
             setName(x.name)
             setAlbumArt(x.album.images[1].url)
-            setProcessSong1(x)
+            setProcessSong1(x.preview_url)
         }
         else {
             setName2(x.name)
             setAlbumArt2(x.album.images[1].url)
-            setProcessSong2(x)
+            setProcessSong2(x.preview_url)
         }
       }
 
@@ -69,7 +70,11 @@ function ChooseSong(props) {
                     </div>
                 </div>
                 <div className="transpose-container">
-                    <button className="transpose"><b>Transpose</b></button>
+                    {/* <button className="transpose"><b>Transpose</b></button> */}
+                    <TestAudio 
+                        songOne = {processSong1}
+                        songTwo = {processSong2}
+                        />
                 </div>
                 <div className="choice-two">
                     <img src={albumArt2} alt= '' />

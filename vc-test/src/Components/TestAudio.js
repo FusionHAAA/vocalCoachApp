@@ -9,31 +9,32 @@ function TestAudio(props) {
   let [convertFirstSong,setConvertFirstSong] = useState(firstSong)
   let [convertSecondSong,setConvertSecondSong] = useState(secondSong)
   let [songConvert,setSongConvert] = useState()
+
   //Transposes audio by a factor value
   //from 0.5 one octave down and 2 one ocatave up
 
  
   let [startingTime1,setStartingTime1] = useState(0)
 
-  useEffect(() => {
-    getSpotifyData();
-   }, []);
+  // useEffect(() => {
+  //   getSpotifyData();
+  //  }, []);
  
  
-   async function getSpotifyData() {
-     fetch("https://api.spotify.com/v1/search?q=harder%2C%20better%2C%20faster%2C%20stronger&type=track&limit=5", {
-       headers: {
-         Accept: "application/json",
-         Authorization: `Bearer ${await token()}`,
-         "Content-Type": "application/json"
-       }
-     })
-       .then((res) => res.json())
-       .then((data) => {
-         setHolder(data.tracks.items[0].preview_url);
-        //  loadSecond("https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-8.mp3")
-       });
-   }
+  //  async function getSpotifyData() {
+  //    fetch("https://api.spotify.com/v1/search?q=harder%2C%20better%2C%20faster%2C%20stronger&type=track&limit=5", {
+  //      headers: {
+  //        Accept: "application/json",
+  //        Authorization: `Bearer ${await token()}`,
+  //        "Content-Type": "application/json"
+  //      }
+  //    })
+  //      .then((res) => res.json())
+  //      .then((data) => {
+  //        setHolder(data.tracks.items[0].preview_url);
+  //       //  loadSecond("https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-8.mp3")
+  //      });
+  //  }
 
 
 
@@ -103,13 +104,12 @@ function getPeaks(data) {
 
 
     function loadTheTrack() {
-
-      // loadSecond(holder)
-
+      
+      loadSecond(props.songTwo)
       
       var request = new XMLHttpRequest();
       //console.log('sent request')
-        request.open('GET',holder,true)
+        request.open('GET',props.songOne,true)
       
         request.responseType = 'arraybuffer';
 
@@ -587,16 +587,16 @@ function getPeaks(data) {
 
   return (
     <div id="wrapper">
-      <p>PitchShift factor value -12 through 12</p>
+      {/* <p>PitchShift factor value -12 through 12</p> */}
       <input id="shiftAmount" type="text" defaultValue="0" />
-      <button onClick={demonMagic}>
+      <button className="transpose" onClick={demonMagic}>
        Transpose
       </button>
   
     
       <div>
-      <audio id='first' src={convertFirstSong} controls></audio>
-      <audio id='second' src={convertSecondSong} controls></audio>
+      <audio id='first' src={convertFirstSong}></audio>
+      <audio id='second' src={convertSecondSong}></audio>
       </div>
       <div>
       <button onClick={playBoth}>PLAY</button>
