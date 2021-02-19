@@ -30,7 +30,7 @@ function SongList(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-   
+        console.log(data)
         setSongs(data.tracks.items)
         setBackgroundAlbum(data.tracks.items[0].album.images[0].url)
        //  loadSecond("https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-8.mp3")
@@ -57,27 +57,32 @@ function SongList(props) {
                 props.displayChoice(eachSong, props.num);
                 setBackgroundAlbum(eachSong.album.images[1].url)
                 }}>
-            <img src={eachSong.album.images[1].url} />
+            <img src={eachSong.album.images[1].url} alt =''/>
               <div className="titles">
-                {console.log(inView)}
+                {/* {console.log(inView)} */}
                 <p><b>{eachSong.artists[0].name}</b> - {eachSong.name}</p>
                 <p>{eachSong.album.name}</p>
               </div>
               <div className="control-buttons">
-                <i className="fas fa-play-circle" id={eachSong.preview_url}
+                <i className="fas fa-play-circle" id={`${eachSong.id}${props.num}`}
                    onClick={() => {
-                    if (document.getElementById(`${eachSong.name}`).paused) {
-                      document.getElementById(`${eachSong.name}`).play()
-                      document.getElementById(`${eachSong.preview_url}`).setAttribute('class', 'fas fa-pause-circle')
+                    if (document.getElementById(`${eachSong.name}${props.num}`).paused) 
+                    {
+                      console.log(document.querySelectorAll('audio'))
+                      document.querySelectorAll('audio').forEach((x)=> { x.pause(); })
+                      document.querySelectorAll('i').forEach((x)=>{x.setAttribute('class','fas fa-play-circle')})
+                      document.getElementById(`${eachSong.name}${props.num}`).play()
+                      document.getElementById(`${eachSong.id}${props.num}`).setAttribute('class', 'fas fa-pause-circle')
                     }
-                    else {
-                      document.getElementById(`${eachSong.name}`).pause()
-                      document.getElementById(`${eachSong.preview_url}`).setAttribute('class', 'fas fa-play-circle')
+                    else 
+                    {
+                      document.getElementById(`${eachSong.name}${props.num}`).pause()
+                      document.getElementById(`${eachSong.id}${props.num}`).setAttribute('class', 'fas fa-play-circle')
                     }
                   }}>
                 </i>
               </div>
-              <audio className="audio-bar" id={eachSong.name}>
+              <audio className="audio-bar" id={`${eachSong.name}${props.num}`}>
                 <source src={eachSong.preview_url} />
               </audio>
           </li>
