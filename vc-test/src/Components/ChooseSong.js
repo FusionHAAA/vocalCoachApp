@@ -13,6 +13,8 @@ function ChooseSong(props) {
     let [name2, setName2] = useState('pick a song 2')
     let [albumArt2, setAlbumArt2] = useState()
     let [processSong2,setProcessSong2] = useState();
+    let [songId1,setSongId1] = useState();
+    let [songId2,setSongId2] = useState();
 
     const displayChoice = (x, num) => {
         if (num == 1) {
@@ -20,12 +22,14 @@ function ChooseSong(props) {
             setAlbumArt(x.album.images[1].url)
             setArtist1(x.artists[0].name)
             setProcessSong1(x.preview_url)
+            setSongId1(x)
         }
         else {
             setName2(x.name)
             setAlbumArt2(x.album.images[1].url)
             setArtist2(x.artists[0].name)
             setProcessSong2(x.preview_url)
+            setSongId2(x)
         }
       }
 
@@ -60,6 +64,8 @@ function ChooseSong(props) {
                     <TestAudio 
                         songOne = {processSong1}
                         songTwo = {processSong2}
+                        songIdOne={songId1}
+                        songIdTwo={songId2}
                         />
                 </div>
                 <div className="choice-two">

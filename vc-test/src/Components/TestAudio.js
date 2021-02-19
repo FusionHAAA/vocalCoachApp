@@ -9,6 +9,8 @@ function TestAudio(props) {
   let [convertFirstSong,setConvertFirstSong] = useState(firstSong)
   let [convertSecondSong,setConvertSecondSong] = useState(secondSong)
   let [songConvert,setSongConvert] = useState()
+  let [firstAnalysis,setFirstAnalysis] = useState({})
+  let [secondAnalysis,setSecondAnalysis] = useState({})
 
   //Transposes audio by a factor value
   //from 0.5 one octave down and 2 one ocatave up
@@ -17,29 +19,55 @@ function TestAudio(props) {
   let [startingTime1,setStartingTime1] = useState(0)
 
   // useEffect(() => {
-  //   getSpotifyData();
+  //   getSpotifyAnalysis();
   //  }, []);
  
  
-  //  async function getSpotifyData() {
-  //    fetch("https://api.spotify.com/v1/search?q=harder%2C%20better%2C%20faster%2C%20stronger&type=track&limit=5", {
-  //      headers: {
-  //        Accept: "application/json",
-  //        Authorization: `Bearer ${await token()}`,
-  //        "Content-Type": "application/json"
-  //      }
-  //    })
-  //      .then((res) => res.json())
-  //      .then((data) => {
-  //        setHolder(data.tracks.items[0].preview_url);
-  //       //  loadSecond("https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-8.mp3")
-  //      });
-  //  }
+   async function getSpotifyAnalysis(id,num) {
+     fetch(`https://api.spotify.com/v1/audio-analysis/${id}`, {
+       headers: {
+         Accept: "application/json",
+         Authorization: `Bearer ${await token()}`,
+         "Content-Type": "application/json"
+       }
+     })
+       .then((res) => res.json())
+       .then((data) => {
+        console.log(data)
+        if(num===1){
+        setFirstAnalysis({
+          bpm: data.track.tempo,
+          key: data.track.key
+        })
+      }else{
+        setSecondAnalysis({
+          bpm: data.track.tempo,
+          key: data.track.key
+        })
+      }
+     
+        //  setHolder(data.tracks.items[0].preview_url);
+        //  loadSecond("https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-8.mp3")
+       });
+   }
 
+  function getMusicAnalysis(){
+    let useId1 = props.songIdOne.id
+    let useId2 = props.songIdTwo.id
 
+    getSpotifyAnalysis(useId1,1)
+    getSpotifyAnalysis(useId2,2)
+   
+  }
+  
+ 
 
   const demonMagic = () => {
     //////
+    getMusicAnalysis();
+
+
+
     const MAX_FRAME_LENGTH = 16000;
     var gInFIFO = new Array(MAX_FRAME_LENGTH).fill(0.0);
     var gOutFIFO = new Array(MAX_FRAME_LENGTH).fill(0.0);
@@ -96,8 +124,7 @@ function getPeaks(data) {
   peaks.sort(function(a, b) {
     return a.position - b.position;
   });
-  console.log(peaks)
-  console.log(data)
+
   return peaks;
 }
 
@@ -602,6 +629,7 @@ function getPeaks(data) {
       <button onClick={playBoth}>PLAY</button>
       <button onClick={pauseBoth}>PAUSE</button>
       <button onClick={stopBoth}>STOP</button>
+      <button onClick={console.log(firstAnalysis,secondAnalysis)}>log info</button>
       </div>
       
     </div>
