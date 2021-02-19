@@ -12,6 +12,8 @@ function TestAudio(props) {
   //Transposes audio by a factor value
   //from 0.5 one octave down and 2 one ocatave up
 
+ 
+  let [startingTime1,setStartingTime1] = useState(0)
 
   useEffect(() => {
     getSpotifyData();
@@ -57,78 +59,127 @@ function TestAudio(props) {
 //transpose
 //
 //load it into one audio player
+function getPeaks(data) {
+
+
+  var partSize = 22050,
+      parts = data[0].length / partSize,
+      peaks = [];
+
+  for (var i = 0; i < parts; i++) {
+    var max = 0;
+    for (var j = i * partSize; j < (i + 1) * partSize; j++) {
+      var volume = Math.max(Math.abs(data[0][j]), Math.abs(data[1][j]));
+      if (!max || (volume > max.volume)) {
+        max = {
+          position: j,
+          volume: volume
+        };
+      }
+    }
+    peaks.push(max);
+  }
+
+
+
+  peaks.sort(function(a, b) {
+    return b.volume - a.volume;
+  });
+
+
+
+  peaks = peaks.splice(0, peaks.length * 0.5);
+
+
+
+  peaks.sort(function(a, b) {
+    return a.position - b.position;
+  });
+  console.log(peaks)
+  console.log(data)
+  return peaks;
+}
 
 
 
     function loadTheTrack() {
 
-      loadSecond(holder)
+      // loadSecond(holder)
 
       
       var request = new XMLHttpRequest();
       //console.log('sent request')
-        request.open('GET',"https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-8.mp3",true)
+        request.open('GET',holder,true)
       
         request.responseType = 'arraybuffer';
 
         request.onload = function() {
           
+          // Create offline context
+        var OfflineContext = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+        var offlineContext = new OfflineContext(2, 30 * 44100, 44100);
+          let copyOfData = request.response.slice(0);
+        offlineContext.decodeAudioData(request.response, function(buffer) {
+
+          // Create buffer source
+          var source = offlineContext.createBufferSource();
+          source.buffer = buffer;
+
+          // Beats, or kicks, generally occur around the 100 to 150 hz range.
+          // Below this is often the bassline.  So let's focus just on that.
+
+          // First a lowpass to remove most of the song.
+
+          var lowpass = offlineContext.createBiquadFilter();
+          lowpass.type = "lowpass";
+          lowpass.frequency.value = 150;
+          lowpass.Q.value = 1;
+
+          // Run the output of the source through the low pass.
+
+          source.connect(lowpass);
+
+          // Now a highpass to remove the bassline.
+
+          var highpass = offlineContext.createBiquadFilter();
+          highpass.type = "highpass";
+          highpass.frequency.value = 100;
+          highpass.Q.value = 1;
+
+          // Run the output of the lowpass through the highpass.
+
+          lowpass.connect(highpass);
+
+          // Run the output of the highpass through our offline context.
+
+          highpass.connect(offlineContext.destination);
+
+          // Start the source, and render the output into the offline conext.
+
+          source.start(0);
+          offlineContext.startRendering();
+        });
+
+        offlineContext.oncomplete = function(e) {
+          var buffer = e.renderedBuffer;
+          var peaks = getPeaks([buffer.getChannelData(0), buffer.getChannelData(1)]);
+         
+
+          console.log((30*(peaks[0].position))/buffer.getChannelData(0).length)
+
+          setStartingTime1((30*(peaks[0].position))/buffer.getChannelData(0).length); 
+          
+         
+         
+        };
 
 
           audioCtx.decodeAudioData(
-            this.response,
+            copyOfData,
             (decodedData) => {
               var in_data_l = decodedData.getChannelData(0);
               
               var in_data_r = decodedData.getChannelData(1);
-
-            
-
-              
-         
-              // var beatSample = offlineCtx.createBufferSource();
-              // beatSample.buffer = decodedData;
-     
-              // // Create a Low Pass Filter to Isolate Low End Beat
-              // var filter = offlineCtx.createBiquadFilter();
-              // filter.type = "lowpass";
-              // filter.frequency.value = 140;
-              // beatSample.connect(filter);
-              // filter.connect(offlineCtx.destination);
-
-              // offlineCtx.startRendering().then(function(lowPassAudioBuffer) {
- 
-              //   var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
-              //   var song = audioCtx.createBufferSource();
-              //   song.buffer = lowPassAudioBuffer;
-              //   song.connect(audioCtx.destination);
-   
-              //   // Save lowPassBuffer in Global Array
-              //   window.lowPassBuffer = song.buffer.getChannelData(0);
-              //   console.log(window.lowPassBuffer);
-              //   console.log("Low Pass Buffer Rendered!");
-              //  });
-
-              // //Down-sample the clip
-              // function getSampleClip(data, samples) {
-
-              //   var newArray = [];
-              //   var modulus_coefficient = Math.round(data.length / samples);
-
-              //   for (var i = 0; i < data.length; i++) {
-              //     if (i % modulus_coefficient == 0) {
-              //         newArray.push(data[i]);
-              //     }
-              //   }
-              //   return newArray;
-              //   }
-
-              //   window.lowPassBuffer = getSampleClip(window.lowPassBuffer,300)
-              
-              
-
-
-
 
 
               let shiftFactor = document.getElementById('shiftAmount').value
@@ -505,6 +556,7 @@ function TestAudio(props) {
 
   const loadFirst = (x)=> {
     setConvertFirstSong(x)
+    
   }
 
   const loadSecond =(x)=> {
@@ -523,8 +575,9 @@ function TestAudio(props) {
 
   const stopBoth=() => {
     pauseBoth();
-    document.getElementById('first').currentTime = 0
-    document.getElementById('second').currentTime = 0
+    console.log(startingTime1)
+    document.getElementById('first').currentTime=startingTime1
+    document.getElementById('second').currentTime = startingTime1
   }
 
 

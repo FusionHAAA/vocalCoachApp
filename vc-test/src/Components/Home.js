@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import album1 from "../images/jcole-album.jpg";
 import album2 from "../images/hozier-album.jpg";
-import BeatDetectorTest from "./BeatDetectorTest";
 import album3 from '../images/doja-album.jpg'
 import album4 from '../images/bob-dylan-album.jpg'
 import album5 from '../images/billie-eilish-album.jpg'
@@ -10,7 +9,7 @@ import album6 from '../images/glass-animals-album.jpg'
 import album7 from '../images/harry-styles-album.jpg'
 import album8 from '../images/olivia-album.jpg'
 import TestAudio from "./TestAudio.js";
-import TestApiSpo from "./TestApiSpo.js";
+
 
 function Home(props) {
   return (

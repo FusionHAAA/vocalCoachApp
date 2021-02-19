@@ -9,6 +9,9 @@ html {
   height: 100%;
   width: 100%;
 }
+
+
+
 .App {
   padding: 2%;
   display: flex;
@@ -26,13 +29,20 @@ html {
   flex-direction: column;
   align-items: center;
 }
-
+#wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30%;
+}
 /* ---nav bar--- */
 nav {
   position: fixed;
   display: flex;
   justify-content: space-evenly;
   height: 6vh;
+  width: 100%;
   z-index: 1;
 }
 nav a {

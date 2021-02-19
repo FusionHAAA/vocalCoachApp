@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ScrollAnimation from 'react-animate-on-scroll'
 import "animate.css/animate.min.css";
+import SpotifyObject from './SpotifyObject'
+import token from './Token.js';
+
 
 //https://cors-anywhere.herokuapp.com
 
@@ -17,34 +20,39 @@ function SongList(props) {
     findTheSong();
   }, []);
 
-  const findTheSong = () => {
-    axios
-      .get(
-        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=artist:"${song}"`
-      )
-      .then((res) => {
-        console.log(res);
-        setSongs(res.data.data);
-        setBackgroundAlbum(res.data.data[0].album.cover)
+  
+  async function findTheSong (){
+    fetch(`https://api.spotify.com/v1/search?q=${song}&type=track&limit=10`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${await token()}`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+    console.log(data.tracks.items)
+        setSongs(data.tracks.items)
+        setBackgroundAlbum(data.tracks.items[0].album.images[0].url)
+       //  loadSecond("https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-8.mp3")
       });
-  };
+  }
+ 
 
   const findSong = (e) => {
     e.preventDefault()
     findTheSong()
   }
-  // const displayChoice = (x) => {
-  //   setName(x.title)
-  //   setAlbumArt(x.artist.picture)
-  //   setBackgroundAlbum(x.album.cover)
-  // }
+
+  
+
 
   let albumCovers = []
 
   const showSongs = () => {
     const size = 6
     const firstSix = songs.slice(0, size).map((eachSong, index) => {
-      albumCovers.push(eachSong.album.cover)
+      albumCovers.push(eachSong.album.images[1].url)
       return (
         <ScrollAnimation 
           animateIn='pulse'
@@ -52,18 +60,18 @@ function SongList(props) {
           scrollableParentSelector='#choose-song-id'
           animatePreScroll={false}>
         
-          <li key={eachSong.id} className="track-bar" tabIndex="1" onClick={() => {props.displayChoice(eachSong, props.num);setBackgroundAlbum(eachSong.album.cover)}}>
-            <img src={eachSong.album.cover} />
+          <li key={eachSong.id} className="track-bar" tabIndex="1" onClick={() => {props.displayChoice(eachSong, props.num);setBackgroundAlbum(eachSong.album.images[1].url)}}>
+            <img src={eachSong.album.images[1].url} alt='' />
               <div className="titles">
-                <p>{eachSong.title}</p>
-                <p>{eachSong.album.title}</p>
+                <p>{eachSong.name}</p>
+                <p>{eachSong.album.name}</p>
               </div>
               <div className="control-buttons">
                 <i className="fas fa-play-circle"></i>
                 {/* <i className="fas fa-pause-circle"></i> */}
               </div>
               <audio className="audio-bar">
-                <source src={eachSong.preview} />
+                <source src={eachSong.preview_url} />
               </audio>
           </li>
 
