@@ -557,6 +557,8 @@ function getPeaks(data) {
 
   const loadFirst = (x)=> {
     document.getElementById('transpose').innerHTML= 'READY'
+    document.getElementById('pba-two').style.animation = 'smallScale 3s infinite'
+    document.getElementById('play-triangle').style.color = 'rgb(253, 85, 85)'
     setConvertFirstSong(x)
     
   }
@@ -597,16 +599,18 @@ function getPeaks(data) {
   return (
     <div id="wrapper">
       <input id="shiftAmount" type="text" defaultValue="0" style={{display:'none'}}/>
-      {showButton()}
+      <button className="transpose" onClick={demonMagic} id="transpose">
+       Transpose
+      </button>
+      {/* {showButton()} */}
      
-      <div>
       <audio id='first' src={convertFirstSong}></audio>
       <audio id='second' src={convertSecondSong}></audio>
-      </div>
+
       <div>
-      <button onClick={playBoth}>PLAY</button>
+      {/* <button onClick={playBoth}>PLAY</button>
       <button onClick={pauseBoth}>PAUSE</button>
-      <button onClick={stopBoth}>STOP</button>
+      <button onClick={stopBoth}>STOP</button> */}
       </div>
       
     </div>

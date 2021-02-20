@@ -6,9 +6,11 @@ import token from './Token.js'
 
  
 function ChooseSong(props) {
-    let [name, setName] = useState('pick a song')
-    let [albumArt, setAlbumArt] = useState()
-    let [name2, setName2] = useState('pick a song 2')
+    let [artist1, setArtist1] = useState()
+    let [title1, setTitle1] = useState('pick a song')
+    let [albumArt1, setAlbumArt1] = useState()
+    let [artist2, setArtist2] = useState()
+    let [title2, setTitle2] = useState('pick a song 2')
     let [albumArt2, setAlbumArt2] = useState()
     let [processSong1,setProcessSong1] = useState();
     let [processSong2,setProcessSong2] = useState();
@@ -25,13 +27,15 @@ function ChooseSong(props) {
 
     const displayChoice = (x, num) => {
         if (num == 1) {
-            setName(x.name)
-            setAlbumArt(x.album.images[1].url)
+            setArtist1(x.artists[0].name)
+            setTitle1(x.name)
+            setAlbumArt1(x.album.images[1].url)
             setProcessSong1(x.preview_url)
             setSongId1(x.id)
         }
         else {
-            setName2(x.name)
+            setArtist2(x.artists[0].name)
+            setTitle2(x.name)
             setAlbumArt2(x.album.images[1].url)
             setProcessSong2(x.preview_url)
             console.log('id to be set',x.id)
@@ -103,21 +107,21 @@ async function getSpotifyAnalysis(id,num) {
                 <SongList num={1}
                     displayChoice = {displayChoice}
                     id = 'song-list-one'
-                    selectKey = "Choose Song #1:"
+                    selectKey = "Pick Song #1:"
                     />
                 <SongList num={2}
                     displayChoice = {displayChoice}
                     id = 'song-list-two'
-                    selectKey = "Choose Song #2:"
+                    selectKey = "Pick Song #2:"
                     />
             </div>
 
             <div className="song-choices">
                 <div className="choice-one">
-                    <img src={albumArt} alt=''/>
+                    <img src={albumArt1} alt=''/>
                     <div>
-                        {/* <p><b>{artist1}</b></p> */}
-                        <p>{name}</p>
+                        <p><b>{artist1}</b></p>
+                        <p>{title1}</p>
                     </div>
                 </div>
                 <div className="transpose-container">
@@ -131,19 +135,28 @@ async function getSpotifyAnalysis(id,num) {
                 <div className="choice-two">
                     <img src={albumArt2} alt= '' />
                     <div>
-                        {/* <p><b>{artist2}</b></p> */}
-                        <p>{name2}</p>
+                        <p><b>{artist2}</b></p>
+                        <p>{title2}</p>
                     </div>
                 </div>
             </div>
 
-
             <div className="example-container">
-                <Link to="/TestAudio">
-                <div className="play-button">
-                    <i className="fas fa-play"></i>
+                <div className="play-button"
+                     onClick={() => {
+                        if (document.getElementById('first').paused && document.getElementById('second').paused) {
+                            document.getElementById('first').play();
+                            document.getElementById('second').play();
+                            document.getElementById('play-triangle').setAttribute('class', 'fas fa-pause')
+                        }
+                        else {
+                            document.getElementById('first').pause();
+                            document.getElementById('second').pause();
+                            document.getElementById('play-triangle').setAttribute('class', 'fas fa-play')
+                        }
+                        }}>
+                    <i className="fas fa-play" id="play-triangle"></i>
                 </div>
-                </Link>
                 <div className="play-button-animation" id="pba-two"></div>
                 <div className="song-details">
                 </div>
