@@ -63,7 +63,9 @@ function SongList(props) {
                 props.displayChoice(eachSong, props.num);
                 setBackgroundAlbum(eachSong.album.images[1].url)
                 }}>
-            <img src={eachSong.album.images[1].url} alt ='album'/>
+              <div className="album-pic-container">
+                <img src={eachSong.album.images[1].url} alt ='album'/>
+              </div>
               <div className="titles">
                 {/* {console.log(inView)} */}
                 <p><b>{eachSong.artists[0].name}</b> - {eachSong.name}</p>
