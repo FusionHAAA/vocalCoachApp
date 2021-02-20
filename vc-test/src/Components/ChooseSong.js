@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 import SongList from './SongList.js'
 import TestAudio from './TestAudio.js'
+import token from './Token.js'
 
  
 function ChooseSong(props) {
@@ -11,10 +12,18 @@ function ChooseSong(props) {
     let [artist2, setArtist2] = useState()
     let [title2, setTitle2] = useState('pick a song 2')
     let [albumArt2, setAlbumArt2] = useState()
-    let [processSong1,setProcessSong1] = useState()
-    let [processSong2,setProcessSong2] = useState()
-    let [songId1,setSongId1] = useState()
-    let [songId2,setSongId2] = useState()
+    let [processSong1,setProcessSong1] = useState();
+    let [processSong2,setProcessSong2] = useState();
+    let [songId1,setSongId1] = useState();
+    let [songId2,setSongId2] = useState();
+    let [showTest,setShowTest] = useState();
+    let [firstAnalysis,setFirstAnalysis] = useState({})
+    let [secondAnalysis,setSecondAnalysis] = useState({})
+
+
+    useEffect(()=>{
+        setShowTest(showTestAudio)
+    },[secondAnalysis,firstAnalysis])
 
     const displayChoice = (x, num) => {
         if (num == 1) {
@@ -22,18 +31,73 @@ function ChooseSong(props) {
             setTitle1(x.name)
             setAlbumArt1(x.album.images[1].url)
             setProcessSong1(x.preview_url)
-            setSongId1(x)
+            setSongId1(x.id)
         }
         else {
             setArtist2(x.artists[0].name)
             setTitle2(x.name)
             setAlbumArt2(x.album.images[1].url)
             setProcessSong2(x.preview_url)
-            setSongId2(x)
+            console.log('id to be set',x.id)
+            setSongId2(x.id)
+            setShowTest(()=>musion(x.id))
         }
       }
 
+const musion=(x)=>{
+    return(
+        <button className="transpose" onClick={()=>getMusicAnalysis(x)}>Muse</button>
+    )
+}
 
+const showTestAudio = ()=>{
+   console.log(processSong1,processSong2,firstAnalysis,secondAnalysis)
+    return(<TestAudio 
+                        songOne = {processSong1}
+                        songTwo = {processSong2}
+                        songIdOne={firstAnalysis}
+                        songIdTwo={secondAnalysis}
+                        />)
+}
+
+async function getSpotifyAnalysis(id,num) {
+    fetch(`https://api.spotify.com/v1/audio-analysis/${id}`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${await token()}`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+       console.log(data,id)
+       if(num===1){
+       setFirstAnalysis({
+         bpm: data.track.tempo,
+         key: data.track.key
+       })
+     }else{
+       setSecondAnalysis({
+         bpm: data.track.tempo,
+         key: data.track.key
+          })
+         }
+      });
+  }
+ 
+
+
+  
+ 
+
+  function getMusicAnalysis(x){
+    let useId1 = songId1
+    let useId2 = x
+    
+    getSpotifyAnalysis(useId1,1)
+    getSpotifyAnalysis(useId2,2)
+    
+  }
       
     return (
         <div className="chooseSong">
@@ -62,12 +126,11 @@ function ChooseSong(props) {
                 </div>
                 <div className="transpose-container">
                     {/* <button className="transpose"><b>Transpose</b></button> */}
-                    <TestAudio 
-                        songOne = {processSong1}
-                        songTwo = {processSong2}
-                        songIdOne={songId1}
-                        songIdTwo={songId2}
-                        />
+
+
+                    {showTest}
+                   
+
                 </div>
                 <div className="choice-two">
                     <img src={albumArt2} alt= '' />
