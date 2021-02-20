@@ -30,7 +30,7 @@ function SongList(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         setSongs(data.tracks.items)
         setBackgroundAlbum(data.tracks.items[0].album.images[0].url)
        //  loadSecond("https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-8.mp3")
@@ -68,7 +68,6 @@ function SongList(props) {
                    onClick={() => {
                     if (document.getElementById(`${eachSong.name}${props.num}`).paused) 
                     {
-                      console.log(document.querySelectorAll('audio'))
                       document.querySelectorAll('audio').forEach((x)=> { x.pause(); })
                       document.querySelectorAll('i').forEach((x)=>{x.setAttribute('class','fas fa-play-circle')})
                       document.getElementById(`${eachSong.name}${props.num}`).play()

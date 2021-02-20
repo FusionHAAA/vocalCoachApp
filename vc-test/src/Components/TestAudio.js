@@ -5,25 +5,13 @@ import lamejs from 'lamejs';
 import token from "./Token.js";
 
 function TestAudio(props) {
-  let [holder,setHolder] = useState()
   let [convertFirstSong,setConvertFirstSong] = useState(firstSong)
   let [convertSecondSong,setConvertSecondSong] = useState(secondSong)
-  let [songConvert,setSongConvert] = useState()
-  let [firstAnalysis,setFirstAnalysis] = useState({})
-  let [secondAnalysis,setSecondAnalysis] = useState({})
 
-  //Transposes audio by a factor value
-  //from 0.5 one octave down and 2 one ocatave up
 
  
   let [startingTime1,setStartingTime1] = useState(0)
-
-  // useEffect(() => {
-  //   getSpotifyAnalysis();
-  //  }, []);
- 
- 
- 
+  let [startingTime2,setStartingTime2] = useState(0)
   
  
 
@@ -92,16 +80,18 @@ function getPeaks(data) {
 
   return peaks;
 }
+//get the keys 
+//set each transpose value to their difference/2
+//get the bpm
+//bpmfirst song / bpm of second =playbackrate second song
 
-
-
-    function loadTheTrack() {
+    function loadTheTrack(song,num) {
       
-      loadSecond(props.songTwo)
+      
       
       var request = new XMLHttpRequest();
       //console.log('sent request')
-        request.open('GET',props.songOne,true)
+        request.open('GET',song,true)
       
         request.responseType = 'arraybuffer';
 
@@ -159,8 +149,11 @@ function getPeaks(data) {
 
           console.log((30*(peaks[0].position))/buffer.getChannelData(0).length)
 
+          if(num===1){
           setStartingTime1((30*(peaks[0].position))/buffer.getChannelData(0).length); 
-          
+          }else{
+          setStartingTime2((30*(peaks[0].position))/buffer.getChannelData(0).length); 
+          }
          
          
         };
@@ -210,11 +203,11 @@ function getPeaks(data) {
               //console.log('ready to convert')
               //console.log(source.buffer)
               //setSongConvert(source.buffer)
-              convertFile(source.buffer)
+              convertFile(source.buffer,num)
             },
             (e) => {
               alert(
-                "Sorry this browser unable to download this file... try Chrome"
+                "Sorry you picked an unavliable song"
               );
             }
           );
@@ -436,7 +429,10 @@ function getPeaks(data) {
         }
       }
     }
-    loadTheTrack();
+    console.log(props.songOne,props.songTwo)
+
+    loadTheTrack(props.songOne,1);
+    loadTheTrack(props.songTwo,2);
     
     
 
@@ -445,7 +441,7 @@ function getPeaks(data) {
 
   
 
-  const convertFile = (stuffToConvert)=> {
+  const convertFile = (stuffToConvert,num)=> {
     
     function audioBufferToWav(aBuffer) {
       let numOfChan = aBuffer.numberOfChannels,
@@ -536,9 +532,16 @@ function getPeaks(data) {
   
       var mp3Blob = new Blob(buffer, {type: 'audio/mp3'});
       var bUrl = window.URL.createObjectURL(mp3Blob);
-      loadFirst(bUrl)
 
-      //console.log('conversionDone')
+      if(num===1){
+        loadFirst(bUrl)
+      }else{
+        loadSecond(bUrl)
+      }
+
+      
+
+      console.log('conversionDone')
   
   }
  
@@ -574,19 +577,22 @@ function getPeaks(data) {
   }
 
 
- 
+  const showButton =()=> {
+    return (
+      <button className="transpose" onClick={demonMagic} id="transpose">
+      Transpose
+     </button>
+
+    )
+  }
  
  
 
   return (
     <div id="wrapper">
-      {/* <p>PitchShift factor value -12 through 12</p> */}
       <input id="shiftAmount" type="text" defaultValue="0" style={{display:'none'}}/>
-      <button className="transpose" onClick={demonMagic} id="transpose">
-       Transpose
-      </button>
-  
-    
+      {showButton()}
+     
       <div>
       <audio id='first' src={convertFirstSong}></audio>
       <audio id='second' src={convertSecondSong}></audio>
