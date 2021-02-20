@@ -88,9 +88,12 @@ function getPeaks(data) {
     function loadTheTrack(song,num) {
       
    const getDesiredKey=()=>{
-     return (Math.abs(((props.songIdOne.key)-(props.songIdTwo.key))/2))
+     let holderKey = ((props.songIdOne.key)-(props.songIdTwo.key))/2
+     props.songIdOne.key=holderKey*-1;
+     props.songIdTwo.key=holderKey*1;
+    return null
    } 
-   getDesiredKey()
+  
       
       var request = new XMLHttpRequest();
       //console.log('sent request')
