@@ -5,8 +5,13 @@ import token from './Token.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function SongList(props) {
+  const artistArray = ['doja cat', 'cardi b', 'dua lipa', 'sza', 'drake', 
+                       'harry styles', 'doja cat', 'harry styles', 'bts',
+                       'the neighbourhood', 'deftones', 'hozier', 'juice wrld',
+                       'doja cat', 'northlane', 'spiritbox', 'travis scott',]
   const [songs, setSongs] = useState([]);
-  const [song, setSong] = useState('doja cat');
+  const [song, setSong] = useState(`${artistArray[Math.floor(Math.random() * artistArray.length)]}`);
+
   const [covers, setCovers] = useState('')
   const [backgroundAlbum, setBackgroundAlbum] = useState()
   const [search, setSearch] = useState('')
@@ -58,20 +63,20 @@ function SongList(props) {
                 props.displayChoice(eachSong, props.num);
                 setBackgroundAlbum(eachSong.album.images[1].url)
                 }}>
-            <img src={eachSong.album.images[1].url} alt =''/>
+            <img src={eachSong.album.images[1].url} alt ='album'/>
               <div className="titles">
                 {/* {console.log(inView)} */}
                 <p><b>{eachSong.artists[0].name}</b> - {eachSong.name}</p>
-                <p>{eachSong.album.name}</p>
+                <p style={{color: '#D94F81'}}>{eachSong.album.name}</p>
               </div>
               <div className="control-buttons">
-                <i className="fas fa-play-circle" id={`${eachSong.id}${props.num}`}
+                <i className="fas fa-play-circle" 
+                   id={`${eachSong.id}${props.num}`}
                    onClick={() => {
                     if (document.getElementById(`${eachSong.name}${props.num}`).paused) 
                     {
-                      console.log(document.querySelectorAll('audio'))
-                      document.querySelectorAll('audio').forEach((x)=> { x.pause(); })
-                      document.querySelectorAll('i').forEach((x)=>{x.setAttribute('class','fas fa-play-circle')})
+                      document.querySelectorAll('audio').forEach((x)=> { x.pause() })
+                      document.querySelectorAll('.fa-play-circle, .fa-pause-circle').forEach((x)=>{x.setAttribute('class', 'fas fa-play-circle')})
                       document.getElementById(`${eachSong.name}${props.num}`).play()
                       document.getElementById(`${eachSong.id}${props.num}`).setAttribute('class', 'fas fa-pause-circle')
                     }
@@ -98,15 +103,15 @@ function SongList(props) {
       <div className="search-field-container">
         <h4>{props.selectKey}</h4>
         <form className="search-box" onSubmit={findSong}>
-            <input type="text" 
-                  className="search" 
-                  value={search}
-                  placeholder= 'Find favorite artist'
-                  onChange={(e) => {
-                    setSong(e.target.value)
-                    setSearch(e.target.value)}}
-                  />
-            <i class="fas fa-search"></i>
+          <i className="fas fa-search" id="srch"></i>
+          <input type="text" 
+                className="search" 
+                value={search}
+                placeholder= 'Find favorite artist'
+                onChange={(e) => {
+                  setSong(e.target.value)
+                  setSearch(e.target.value)}}
+                />
         </form>
       </div>
       <div className="choose-song-list" id={props.id} style={albumBackground}>

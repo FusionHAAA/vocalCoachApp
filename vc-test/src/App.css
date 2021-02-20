@@ -30,12 +30,11 @@ html {
   flex-direction: column;
   align-items: center;
 }
-#wrapper {
+.transpose-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-
 }
 /* ---nav bar--- */
 nav {
@@ -167,6 +166,8 @@ nav a:hover:before, nav a:hover:after {
   height: 10vh;
   z-index: 2;
   position: absolute;
+}
+#pba-one {
   animation: smallScale 3s infinite
 }
 .play-button {
@@ -179,19 +180,21 @@ nav a:hover:before, nav a:hover:after {
 }
 .fa-play {
   color: rgb(4, 71, 255);
-  font-size: 30px;
   position: absolute;
   top: 50%;
   left: 55%;
   transform: translate(-50%, -50%)
 }
-
+.fa-pause {
+  color: rgb(4, 71, 255);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
 .fas {
   font-size: 10vw;
   border-radius: 100%;
-}
-#pba-two {
-  opacity: 0;
 }
 .song-details {
   position: absolute;
@@ -272,15 +275,31 @@ form.search-box {
   margin-bottom: 2%;
 }
 .search {
-  height: 3vh;
-  width: 48vw;
+  box-sizing: border-box;
+  height: 4vh;
+  width: 50vw;
   border-radius: 15px;
   border: 3px solid rgb(55, 55, 206);
-  position: relative;
+  padding-left: 15%;
+}
+input[type=text]:focus {
+  outline: none !important;
+  border: 3px solid rgb(3, 250, 196);
+  background: rgba(128, 128, 128, 0.397)
+}
+input:focus::-webkit-input-placeholder {
+  color: white;
+}
+.transpose:focus {
+  outline: none !important;
+  transform: scale(1.2)
 }
 .fa-search {
   position: absolute;
-  font-size: 50%;
+  font-size: 100%;
+  color: grey;
+  padding: 8px;
+  min-width: 18px;
 }
 .search-field-container {
   display: flex;
@@ -313,7 +332,7 @@ form.search-box {
 .song-choices {
   display: flex;
   color: white;
-  margin-top: 8%;
+  margin-top: 3%;
   width: 90%;
   justify-content: space-between;
   font-size: 12px;
@@ -324,26 +343,42 @@ form.search-box {
   border-radius: 5px;
 }
 .choice-one {
-  width: 30vw;
+  width: 20vw;
+  height: 14vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  
+  padding: 6% 3% 3% 3%;
+  background: linear-gradient(1deg, #9725cc8a, rgb(0 26 255 / 0%));
+  border-radius: 7px;
+  overflow: hidden;
 }
 .choice-two {
-  width: 30vw;
+  width: 20vw;
+  height: 14vh;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap-reverse;
+  align-items: flex-end;
   text-align: end;
+  padding: 6% 3% 3% 3%;
+  background: linear-gradient(1deg, #9725cc8a, rgb(0 26 255 / 0%));
+  border-radius: 7px;
+  overflow: hidden;
+}
+.choice-one img, .choice-two img {
+  margin-bottom: 3px;
+  box-shadow: 0px 0px 10px 4px #00ffad;
+  
 }
 .transpose {
   background:linear-gradient(23deg,#00ffdc, #ff0000c7);
   border-radius: 15px;
   border: 2px solid white;
-  box-shadow: 0px 4px 9px 2px rgb(53 3 95);
+  box-shadow: 0px 1px 15px 2px rgb(119 37 160);
   color: white;
   height: 5vh;
+  width: 22vw;
+  margin: auto;
 }
 li:focus {
   background: rgba(3, 250, 197, 0.616);

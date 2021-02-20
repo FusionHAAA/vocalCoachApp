@@ -5,24 +5,28 @@ import TestAudio from './TestAudio.js'
 
  
 function ChooseSong(props) {
-    let [name, setName] = useState('pick a song')
-    let [albumArt, setAlbumArt] = useState()
-    let [name2, setName2] = useState('pick a song 2')
+    let [artist1, setArtist1] = useState()
+    let [title1, setTitle1] = useState('pick a song')
+    let [albumArt1, setAlbumArt1] = useState()
+    let [artist2, setArtist2] = useState()
+    let [title2, setTitle2] = useState('pick a song 2')
     let [albumArt2, setAlbumArt2] = useState()
-    let [processSong1,setProcessSong1] = useState();
-    let [processSong2,setProcessSong2] = useState();
-    let [songId1,setSongId1] = useState();
-    let [songId2,setSongId2] = useState();
+    let [processSong1,setProcessSong1] = useState()
+    let [processSong2,setProcessSong2] = useState()
+    let [songId1,setSongId1] = useState()
+    let [songId2,setSongId2] = useState()
 
     const displayChoice = (x, num) => {
         if (num == 1) {
-            setName(x.name)
-            setAlbumArt(x.album.images[1].url)
+            setArtist1(x.artists[0].name)
+            setTitle1(x.name)
+            setAlbumArt1(x.album.images[1].url)
             setProcessSong1(x.preview_url)
             setSongId1(x)
         }
         else {
-            setName2(x.name)
+            setArtist2(x.artists[0].name)
+            setTitle2(x.name)
             setAlbumArt2(x.album.images[1].url)
             setProcessSong2(x.preview_url)
             setSongId2(x)
@@ -50,10 +54,10 @@ function ChooseSong(props) {
 
             <div className="song-choices">
                 <div className="choice-one">
-                    <img src={albumArt} alt=''/>
+                    <img src={albumArt1} alt=''/>
                     <div>
-                        {/* <p><b>{artist1}</b></p> */}
-                        <p>{name}</p>
+                        <p><b>{artist1}</b></p>
+                        <p>{title1}</p>
                     </div>
                 </div>
                 <div className="transpose-container">
@@ -68,18 +72,28 @@ function ChooseSong(props) {
                 <div className="choice-two">
                     <img src={albumArt2} alt= '' />
                     <div>
-                        {/* <p><b>{artist2}</b></p> */}
-                        <p>{name2}</p>
+                        <p><b>{artist2}</b></p>
+                        <p>{title2}</p>
                     </div>
                 </div>
             </div>
 
             <div className="example-container">
-                <Link to="/TestAudio">
-                <div className="play-button">
-                    <i className="fas fa-play"></i>
+                <div className="play-button"
+                     onClick={() => {
+                        if (document.getElementById('first').paused && document.getElementById('second').paused) {
+                            document.getElementById('first').play();
+                            document.getElementById('second').play();
+                            document.getElementById('play-triangle').setAttribute('class', 'fas fa-pause')
+                        }
+                        else {
+                            document.getElementById('first').pause();
+                            document.getElementById('second').pause();
+                            document.getElementById('play-triangle').setAttribute('class', 'fas fa-play')
+                        }
+                        }}>
+                    <i className="fas fa-play" id="play-triangle"></i>
                 </div>
-                </Link>
                 <div className="play-button-animation" id="pba-two"></div>
                 <div className="song-details">
                 </div>

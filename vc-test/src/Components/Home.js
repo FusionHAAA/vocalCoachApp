@@ -50,7 +50,7 @@ function Home(props) {
           <div className="play-button">
             <i className="fas fa-play"></i>
           </div>
-          <div className="play-button-animation"></div>
+          <div className="play-button-animation" id="pba-one"></div>
           <div className="song-details">
               <h4>Check it out!</h4>
           </div>
