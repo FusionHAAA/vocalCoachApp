@@ -87,7 +87,10 @@ function getPeaks(data) {
 
     function loadTheTrack(song,num) {
       
-      
+   const getDesiredKey=()=>{
+     return (Math.abs(((props.songIdOne.key)-(props.songIdTwo.key))/2))
+   } 
+   getDesiredKey()
       
       var request = new XMLHttpRequest();
       //console.log('sent request')
@@ -573,7 +576,7 @@ function getPeaks(data) {
     pauseBoth();
     console.log(startingTime1)
     document.getElementById('first').currentTime=startingTime1
-    document.getElementById('second').currentTime = startingTime1
+    document.getElementById('second').currentTime = startingTime2
   }
 
 
