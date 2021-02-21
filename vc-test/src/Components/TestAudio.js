@@ -388,6 +388,9 @@ function getPeaks(data) {
               alert(
                 "Sorry you picked an unavliable song"
               );
+              return (
+                <h2>Please Refresh</h2>
+              )
             }
           );
 
