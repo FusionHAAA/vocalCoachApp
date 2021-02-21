@@ -4,8 +4,12 @@ import ChooseSong from './ChooseSong.js'
 import TestAudio from './TestAudio.js'
 
 function SongFun(props) {
+    const {data} = props.location
+
+
     return (
         <div className="SongFun">
+            <h1>{data}</h1>
             <div className="page-header">
                 <h1>Customize Your Songs</h1>
             </div>

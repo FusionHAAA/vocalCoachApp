@@ -127,7 +127,9 @@ async function getSpotifyAnalysis(id,num) {
                     {showTest}
                     <h3>or</h3>
                     <button className="customize-button">
-                        <Link to="/SongFun">Customize</Link>
+                        <Link to={{
+                            pathname: "/SongFun",
+                            data: [{title1}] }}>Customize</Link>
                     </button>
                 </div>
                 <div className="choice-two">
