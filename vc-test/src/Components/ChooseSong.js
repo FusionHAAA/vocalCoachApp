@@ -10,7 +10,7 @@ function ChooseSong(props) {
     let [title1, setTitle1] = useState('pick a song')
     let [albumArt1, setAlbumArt1] = useState()
     let [artist2, setArtist2] = useState()
-    let [title2, setTitle2] = useState('pick a song 2')
+    let [title2, setTitle2] = useState('pick a song')
     let [albumArt2, setAlbumArt2] = useState()
     let [processSong1,setProcessSong1] = useState();
     let [processSong2,setProcessSong2] = useState();
@@ -88,9 +88,6 @@ async function getSpotifyAnalysis(id,num) {
   }
  
 
-
- 
-
   function getMusicAnalysis(x){
     let useId1 = songId1
     let useId2 = x
@@ -127,11 +124,11 @@ async function getSpotifyAnalysis(id,num) {
                 </div>
                 <div className="transpose-container">
                     {/* <button className="transpose"><b>Transpose</b></button> */}
-
-
                     {showTest}
-                   
-
+                    <h3>or</h3>
+                    <button className="customize-button">
+                        <Link to="/SongFun">Customize</Link>
+                    </button>
                 </div>
                 <div className="choice-two">
                     <img src={albumArt2} alt= '' />

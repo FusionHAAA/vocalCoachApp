@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import ChooseSong from './ChooseSong.js'
+import TestAudio from './TestAudio.js'
 
 function SongFun(props) {
     return (
@@ -31,7 +33,6 @@ function SongFun(props) {
                     play song 1
                 </div>
                 <div className="play-transposed">
-                    transpose
                 </div>
                 <div className="play-transposed-song pts-1">
                     play song 2
