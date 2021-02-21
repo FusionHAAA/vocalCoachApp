@@ -777,7 +777,7 @@ function getPeaks(data) {
 
   const showButton =()=> {
     return (
-      <button className="transpose" onClick={demonMagic} id="transpose">
+      <button className="transpose" id="transpose" onClick={demonMagic}>
       Transpose
      </button>
 
@@ -792,17 +792,12 @@ function getPeaks(data) {
       <button className="transpose" onClick={demonMagic} id="transpose">
        Transpose
       </button>
-      {/* {showButton()} */}
-     
       <audio id='first' src={convertFirstSong}></audio>
       <audio id='second' src={convertSecondSong}></audio>
-
-      <div>
-      {/* <button onClick={playBoth}>PLAY</button>
+      {/* {showButton()}
+      <button onClick={playBoth}>PLAY</button>
       <button onClick={pauseBoth}>PAUSE</button>
       <button onClick={stopBoth}>STOP</button> */}
-      </div>
-      
     </div>
   );
 }

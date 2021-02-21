@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import SongList from './SongList.js'
 import TestAudio from './TestAudio.js'
 import token from './Token.js'
+import SongFun from './SongFun.js'
 
  
 function ChooseSong(props) {
     let [artist1, setArtist1] = useState()
     let [title1, setTitle1] = useState('pick a song')
+    let [albumTitle1, setAlbumTitle1] = useState()
     let [albumArt1, setAlbumArt1] = useState()
     let [artist2, setArtist2] = useState()
     let [title2, setTitle2] = useState('pick a song')
+    let [albumTitle2, setAlbumTitle2] = useState()
     let [albumArt2, setAlbumArt2] = useState()
     let [processSong1,setProcessSong1] = useState();
     let [processSong2,setProcessSong2] = useState();
@@ -29,6 +32,7 @@ function ChooseSong(props) {
         if (num == 1) {
             setArtist1(x.artists[0].name)
             setTitle1(x.name)
+            setAlbumTitle1(x.album.name)
             setAlbumArt1(x.album.images[1].url)
             setProcessSong1(x.preview_url)
             setSongId1(x.id)
@@ -36,6 +40,7 @@ function ChooseSong(props) {
         else {
             setArtist2(x.artists[0].name)
             setTitle2(x.name)
+            setAlbumTitle2(x.album.name)
             setAlbumArt2(x.album.images[1].url)
             setProcessSong2(x.preview_url)
             //console.log('id to be set',x.id)
@@ -116,7 +121,7 @@ async function getSpotifyAnalysis(id,num) {
 
             <div className="song-choices">
                 <div className="choice-one">
-                    <img src={albumArt1} alt=''/>
+                        <img src={albumArt1} alt= '' />
                     <div>
                         <p><b>{artist1}</b></p>
                         <p>{title1}</p>
@@ -125,13 +130,27 @@ async function getSpotifyAnalysis(id,num) {
                 <div className="transpose-container">
                     {/* <button className="transpose"><b>Transpose</b></button> */}
                     {showTest}
-                    <h3>or</h3>
+                    <h4 style={{margin: '10%'}}>or</h4>
                     <button className="customize-button">
-                        <Link to="/SongFun">Customize</Link>
+                        <Link to={{
+                            pathname: "/SongFun",
+                            spotifyInfo: {
+                                artist1: `${artist1}`,
+                                title1: `${title1}`,
+                                albumTitle1: `${albumTitle1}`,
+                                albumArt1: `${albumArt1}`,
+                                artist2: `${artist2}`,
+                                title2: `${title2}`,
+                                albumTitle2: `${albumTitle2}`,
+                                albumArt2: `${albumArt2}`,
+                                processSong1: `${processSong1}`,
+                                processSong2: `${processSong2}`
+                            }
+                         }} className="customize-button-btn">Customize</Link>
                     </button>
                 </div>
                 <div className="choice-two">
-                    <img src={albumArt2} alt= '' />
+                        <img src={albumArt2} alt= '' />
                     <div>
                         <p><b>{artist2}</b></p>
                         <p>{title2}</p>
@@ -159,7 +178,6 @@ async function getSpotifyAnalysis(id,num) {
                 <div className="song-details">
                 </div>
             </div>
-
         </div>
     );
 }
