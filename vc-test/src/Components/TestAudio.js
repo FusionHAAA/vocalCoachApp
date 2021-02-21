@@ -8,12 +8,23 @@ function TestAudio(props) {
   let [convertFirstSong,setConvertFirstSong] = useState(firstSong)
   let [convertSecondSong,setConvertSecondSong] = useState(secondSong)
 
-
+  let [newRate1,setNewRate1]=useState(1)
+  let [newRate2,setNewRate2]=useState(1)
  
   let [startingTime1,setStartingTime1] = useState(0)
   let [startingTime2,setStartingTime2] = useState(0)
+  useEffect(()=>{
+    document.getElementById('first').playbackRate= newRate1
+    document.getElementById('first').currentTime=startingTime1
+  },[newRate1,newRate2,startingTime1,startingTime2])
   
+  useEffect(()=>{
+    document.getElementById('second').playbackRate= newRate2
+    document.getElementById('second').currentTime=startingTime2
+    
+  },[newRate2,startingTime2])
  
+  //console.log(newRate1,'newRate1')
 
   const demonMagic = () => {
     //////
@@ -33,7 +44,8 @@ function TestAudio(props) {
     var gSynFreq = new Array(MAX_FRAME_LENGTH).fill(0.0);
     var gSynMagn = new Array(MAX_FRAME_LENGTH).fill(0.0);
     var gRover = 0;
-    var AudioContext = window.AudioContext;
+    var offlineContext = new OfflineAudioContext(2, 30 * 44100, 44100);
+    var offlineContext2 = new OfflineAudioContext(2, 30 * 44100, 44100);
     var audioCtx = new AudioContext();
     // var offlineCtx= new OfflineAudioContext(1,44100*4,44100);
     
@@ -86,28 +98,64 @@ function getPeaks(data) {
 //bpmfirst song / bpm of second =playbackrate second song
 
     function loadTheTrack(song,num) {
+      let shiftFactor1=0
+      let shiftFactor2=0
+
       
-   const getDesiredKey=()=>{
-     let holderKey = ((props.songIdOne.key)-(props.songIdTwo.key))/2
-     props.songIdOne.key=holderKey*-1;
-     props.songIdTwo.key=holderKey*1;
-    return null
-   } 
+   
+
+
+   const getDesiredKey=()=>
+    {
+      let songKey1= props.songIdOne.key
+      let songKey2= props.songIdTwo.key
+      let newKey1=0
+      let newKey2=0
+      
+      if(songKey1!==songKey2)
+      {
+      let difference =songKey1-songKey2
+    
+      if(Math.abs(difference)==1)
+      {
+        newKey1=songKey1
+        newKey2=songKey2+difference
+      }
+      else{
+        newKey1=songKey1-(Math.floor(difference/2))
+        newKey2=songKey2+(Math.ceil(difference/2))
+      }
+    
+      shiftFactor1=newKey1-songKey1
+      shiftFactor2=newKey2-songKey2
+    }else{
+      newKey1=songKey1
+      newKey2=songKey2
+    }
+      console.log(`song1:  ${songKey1}`,`/////////song2: ${songKey2}`)
+      console.log(`sft1:  ${shiftFactor1}`,`/////////sft2: ${shiftFactor2}`)
+      console.log(`new1:  ${newKey1}`,`/////////new2: ${newKey2}`)
+      
+    }
   
+      getDesiredKey()
+ 
+   
+ 
       
       var request = new XMLHttpRequest();
-      //console.log('sent request')
+      ////console.log('sent request')
         request.open('GET',song,true)
       
         request.responseType = 'arraybuffer';
 
         request.onload = function() {
           
-          // Create offline context
-        var OfflineContext = window.OfflineAudioContext || window.webkitOfflineAudioContext;
-        var offlineContext = new OfflineContext(2, 30 * 44100, 44100);
+        //   // Create offline context
+      if(num===1)
+     {
           let copyOfData = request.response.slice(0);
-        offlineContext.decodeAudioData(request.response, function(buffer) {
+        offlineContext.decodeAudioData(copyOfData, function(buffer) {
 
           // Create buffer source
           var source = offlineContext.createBufferSource();
@@ -153,8 +201,8 @@ function getPeaks(data) {
           var peaks = getPeaks([buffer.getChannelData(0), buffer.getChannelData(1)]);
          
 
-          console.log((30*(peaks[0].position))/buffer.getChannelData(0).length)
-
+          //console.log((30*(peaks[0].position))/buffer.getChannelData(0).length)
+         
           if(num===1){
           setStartingTime1((30*(peaks[0].position))/buffer.getChannelData(0).length); 
           }else{
@@ -163,19 +211,85 @@ function getPeaks(data) {
          
          
         };
+      }
+      else
+      {
+        let copyOfData = request.response.slice(0);
+      offlineContext2.decodeAudioData(copyOfData, function(buffer) {
 
+        // Create buffer source
+        var source = offlineContext2.createBufferSource();
+        source.buffer = buffer;
+
+        // Beats, or kicks, generally occur around the 100 to 150 hz range.
+        // Below this is often the bassline.  So let's focus just on that.
+
+        // First a lowpass to remove most of the song.
+
+        var lowpass = offlineContext2.createBiquadFilter();
+        lowpass.type = "lowpass";
+        lowpass.frequency.value = 150;
+        lowpass.Q.value = 1;
+
+        // Run the output of the source through the low pass.
+
+        source.connect(lowpass);
+
+        // Now a highpass to remove the bassline.
+
+        var highpass = offlineContext2.createBiquadFilter();
+        highpass.type = "highpass";
+        highpass.frequency.value = 100;
+        highpass.Q.value = 1;
+
+        // Run the output of the lowpass through the highpass.
+
+        lowpass.connect(highpass);
+
+        // Run the output of the highpass through our offline context.
+
+        highpass.connect(offlineContext2.destination);
+
+        // Start the source, and render the output into the offline conext.
+
+        source.start(0);
+        offlineContext2.startRendering();
+      });
+
+      offlineContext2.oncomplete = function(e) {
+        var buffer = e.renderedBuffer;
+        var peaks = getPeaks([buffer.getChannelData(0), buffer.getChannelData(1)]);
+       
+
+        //console.log((30*(peaks[0].position))/buffer.getChannelData(0).length)
+       
+        if(num===1){
+        setStartingTime1((30*(peaks[0].position))/buffer.getChannelData(0).length); 
+        }else{
+        setStartingTime2((30*(peaks[0].position))/buffer.getChannelData(0).length); 
+        }
+       
+       
+      };
+    }
 
           audioCtx.decodeAudioData(
-            copyOfData,
+           request.response,
             (decodedData) => {
               var in_data_l = decodedData.getChannelData(0);
               
               var in_data_r = decodedData.getChannelData(1);
 
 
-              let shiftFactor = document.getElementById('shiftAmount').value
+              let shiftFactor = 0;
+              if(num===1)
+              {
+                shiftFactor=shiftFactor1
+              }else{
+                shiftFactor=shiftFactor2
+              }
               let shiftAmount = Math.pow(Math.pow(2, 1 / 12), shiftFactor);
-              console.log(0)
+              console.log(shiftAmount)
               in_data_l = PitchShift(
                 shiftAmount,
                 in_data_l.length,
@@ -186,7 +300,7 @@ function getPeaks(data) {
               );
 
               console.log(1)
-              //console.log('...still transposing');
+              ////console.log('...still transposing');
               in_data_r = PitchShift(
                 shiftAmount,
                 in_data_l.length,
@@ -202,14 +316,73 @@ function getPeaks(data) {
               
               decodedData.copyToChannel(in_data_r, 1);
               console.log(4)
-              var source = audioCtx.createBufferSource(); // creates a sound source
-              source.buffer = decodedData; // tell the source which sound to play
+
+
+              ////////Code for EQ//////////
+
+            //  if(num===1){
                 
-              source.connect(audioCtx.destination); // connect the source to the context's destination (the speakers)
-              //console.log('ready to convert')
-              //console.log(source.buffer)
-              //setSongConvert(source.buffer)
-              convertFile(source.buffer,num)
+            //   var source = offlineContext.createBufferSource(); // creates a sound source
+            //   source.buffer=decodedData
+            //   var superFilter = offlineContext.createBiquadFilter();
+            //   if(num===1){
+             
+            //   superFilter.type = "lowpass";
+            //   superFilter.frequency.value = 500;
+            //   superFilter.Q.value = 1;
+            //   }else{
+             
+            //   superFilter.type = "highpass";
+            //   superFilter.frequency.value = 500;
+            //   superFilter.Q.value = 1;
+
+            //   }
+
+            //   source.connect(superFilter)
+                
+            //   superFilter.connect(offlineContext.destination); // connect the source to the context's destination (the speakers)
+             
+            //   source.start(0);
+            //   offlineContext.startRendering().then(function(renderedBuffer){
+            //     console.log('rendered')
+            //     convertFile(renderedBuffer,1)
+            //     if(num===1){
+            //     loadTheTrack(props.songTwo,2);
+            //     }
+            //   });
+            // }
+            // else{
+            //   var source2 = offlineContext2.createBufferSource(); // creates a sound source
+            //   source2.buffer=decodedData
+            //   var superFilter2 = offlineContext2.createBiquadFilter();
+            //   if(num===1){
+             
+            //   superFilter2.type = "lowpass";
+            //   superFilter2.frequency.value = 350;
+            //   superFilter2.Q.value = 1;
+            //   }else{
+             
+            //   superFilter2.type = "highpass";
+            //   superFilter2.frequency.value = 350;
+            //   superFilter2.Q.value = 1;
+
+            //   }
+
+            //   source2.connect(superFilter2)
+                
+            //   superFilter2.connect(offlineContext2.destination); // connect the source to the context's destination (the speakers)
+             
+            //   source2.start(0);
+            //   offlineContext2.startRendering().then(function(renderedBuffer){
+            //     console.log('rendered')
+            //     convertFile(renderedBuffer,2)
+
+
+     
+               convertFile(decodedData,num)
+            //   });
+
+            // }
             },
             (e) => {
               alert(
@@ -217,6 +390,7 @@ function getPeaks(data) {
               );
             }
           );
+
         };
       request.send();
      
@@ -435,7 +609,7 @@ function getPeaks(data) {
         }
       }
     }
-    console.log(props.songOne,props.songTwo)
+    //console.log(props.songOne,props.songTwo)
 
     loadTheTrack(props.songOne,1);
     loadTheTrack(props.songTwo,2);
@@ -538,7 +712,7 @@ function getPeaks(data) {
   
       var mp3Blob = new Blob(buffer, {type: 'audio/mp3'});
       var bUrl = window.URL.createObjectURL(mp3Blob);
-
+      console.log(bUrl)
       if(num===1){
         loadFirst(bUrl)
       }else{
@@ -547,7 +721,7 @@ function getPeaks(data) {
 
       
 
-      console.log('conversionDone')
+    
   
   }
  
@@ -556,15 +730,31 @@ function getPeaks(data) {
   }
 
   const loadFirst = (x)=> {
-    document.getElementById('transpose').innerHTML= 'READY'
-    document.getElementById('pba-two').style.animation = 'smallScale 3s infinite'
-    document.getElementById('play-triangle').style.color = 'rgb(253, 85, 85)'
+   
     setConvertFirstSong(x)
     
   }
 
+
+  const matchBpm =()=> {
+    let bpm1= props.songIdOne.bpm
+    let bpm2= props.songIdTwo.bpm
+    
+    console.log((bpm1/bpm2),bpm1,bpm2)
+    let diff= ((bpm1-bpm2)/2)
+
+    setNewRate1((bpm1-diff)/bpm1)
+    setNewRate2((bpm2+diff)/bpm2)
+
+  }
+
   const loadSecond =(x)=> {
+    document.getElementById('transpose').innerHTML= 'READY'
+    document.getElementById('pba-two').style.animation = 'smallScale 3s infinite'
+    document.getElementById('play-triangle').style.color = 'rgb(253, 85, 85)'
     setConvertSecondSong(x)
+    matchBpm()
+    stopBoth()
   }
 
   const playBoth= () => {
@@ -579,7 +769,7 @@ function getPeaks(data) {
 
   const stopBoth=() => {
     pauseBoth();
-    console.log(startingTime1)
+    //console.log(startingTime1)
     document.getElementById('first').currentTime=startingTime1
     document.getElementById('second').currentTime = startingTime2
   }
