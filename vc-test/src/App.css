@@ -267,6 +267,7 @@ nav a:hover:before, nav a:hover:after {
   margin-left: 1%;
   border: 3px solid white;
   border-radius: 6px;
+  overflow: hidden;
 }
 .album-pic-container img {
   width: 100%;
@@ -335,6 +336,7 @@ input:focus::-webkit-input-placeholder {
   width: 90%;
   justify-content: space-between;
   font-size: 12px;
+  overflow: hidden;
 }
 .song-choices img {
   width: 12vw;
@@ -374,8 +376,8 @@ input:focus::-webkit-input-placeholder {
   border: 2px solid white;
   box-shadow: 0px 1px 15px 2px rgb(119 37 160);
   color: white;
-  height: 5vh;
-  width: 22vw;
+  height: 4vh;
+  width: 20vw;
 }
 .transpose:focus, .customize-button:focus {
   outline: none !important;
@@ -397,8 +399,13 @@ input:focus::-webkit-input-placeholder {
   border: 2px solid white;
   box-shadow: 0px 1px 15px 2px rgb(119 37 160);
   color: white;
-  height: 5vh;
-  width: 22vw;
+  font-size: 1em;
+  height: 4vh;
+  width: 20vw;
+}
+.customize-button-btn {
+  text-decoration: none;
+  color: white;
 }
 li:focus {
   background: rgba(3, 250, 197, 0.616);
@@ -417,6 +424,9 @@ li:focus {
   height: 100vh;
   color: white;
 }
+.page-header {
+  margin-top: 10%;
+}
 .customize {
   width: 90%;
   height: 35vh;
@@ -426,28 +436,58 @@ li:focus {
   justify-content: space-evenly;
 }
 .customize-transpose {
-  width: 90%;
-  background: rgb(4, 224, 4);
+  background-image: url('./images/music-wave.png');
+  background-size: contain;
+  border: 2px solid white;
+  width: 70%;
   height: 10vh;
-  border-radius: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+.play-transposed-song {
+  width: 33%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .audio-canvas {
   height: 40%;
-  background: rgb(189, 127, 12);
+  background: rgb(255, 74, 195);
   border: 2px solid white;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .track-listing {
-  background: black;
+  background-size: cover;
+  background-position: left;
+  box-shadow: inset 0px 0px 20px 11px #00000052;
+  display: flex;
+  justify-content: space-between;
+  padding: 2%;
   height: 20%;
   display: flex;
   border: 3px solid white;
-  border-radius: 10px;
+  border-radius: 5px;
+  font-size: 14px;
 }
 .artist-album-pic {
-  border: 2px solid white;
+  border: 3px solid white;
   border-radius: 10px;
-  background: red;
+  box-shadow: 0px 0px 5px 2px black;
+  height: 6vh;
+  width: 12vw;
+  overflow: hidden;
+}
+.artist-album-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.artist-title-text p {
+  text-shadow: -1px 0 10px #00000063, 0 1px 10px #00000063, 1px 0 10px #00000063, 0 -1px 10px #00000063;
 }
 .audio-panels {
   background: blue;

@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback, useOnScreen } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useInView } from 'react-intersection-observer'
 import token from './Token.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -16,11 +15,6 @@ function SongList(props) {
   const [backgroundAlbum, setBackgroundAlbum] = useState()
   const [search, setSearch] = useState('')
   const [playSong, setPlaySong] = useState()
-
-  const { ref, inView, entry } = useInView({
-    root: document.querySelector('#song-list-one'),
-    threshold: 0,
-  })
 
   useEffect(() => {
     findTheSong();
@@ -55,8 +49,7 @@ function SongList(props) {
     return songs.map((eachSong) => {
       albumCovers.push(eachSong.album.images[1].url)
       return ( 
-          <li ref={ref}
-              key={eachSong.id} 
+          <li key={eachSong.id} 
               className="track-bar" 
               tabIndex="1" 
               onClick={() => {
@@ -64,10 +57,9 @@ function SongList(props) {
                 setBackgroundAlbum(eachSong.album.images[1].url)
                 }}>
               <div className="album-pic-container">
-                <img src={eachSong.album.images[1].url} alt ='album'/>
+                <img src={eachSong.album.images[1].url} alt='album'/>
               </div>
               <div className="titles">
-                {/* {console.log(inView)} */}
                 <p><b>{eachSong.artists[0].name}</b> - {eachSong.name}</p>
                 <p style={{color: '#D94F81'}}>{eachSong.album.name}</p>
               </div>
