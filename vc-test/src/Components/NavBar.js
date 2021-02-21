@@ -16,11 +16,15 @@ function NavBar(props) {
                 </Link>
             </div>
             <div className="nav-links">
+                <Link to="/SongFun" alt="Song Fun">
+                    <b>Customize</b>
+                </Link>
+            </div>
+            <div className="nav-links">
                 <Link to="/TestAudio" alt="Test Audio">
                     <b>Test Audio</b>
                 </Link>
-            </div>
-           
+            </div>       
         </nav>
     );
 }

@@ -5,6 +5,7 @@ import Home from "./Components/Home.js";
 import NavBar from "./Components/NavBar.js"
 import TestAudio from "./Components/TestAudio.js";
 import ChooseSong from './Components/ChooseSong.js'
+import SongFun from './Components/SongFun.js'
 import TestBpm from "./Components/TestBpm.js";
 
 
@@ -18,6 +19,7 @@ function App() {
       <Switch>
         <Route exact path="/" render={(props) => <Home {...props} />} />
         <Route exact path="/ChooseSong" render={(props) => <ChooseSong {...props} />} />
+        <Route exact path="/SongFun" render={(props) => <SongFun {...props} />} />
         <Route
           exact
           path="/TestAudio"
