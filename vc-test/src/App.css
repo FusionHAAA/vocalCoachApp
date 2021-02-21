@@ -292,10 +292,7 @@ input[type=text]:focus {
 input:focus::-webkit-input-placeholder {
   color: white;
 }
-.transpose:focus {
-  outline: none !important;
-  transform: scale(1.2)
-}
+
 .fa-search {
   position: absolute;
   font-size: 100%;
@@ -370,17 +367,38 @@ input:focus::-webkit-input-placeholder {
 .choice-one img, .choice-two img {
   margin-bottom: 3px;
   box-shadow: 0px 0px 10px 4px #00ffad;
-  
 }
 .transpose {
-  background:linear-gradient(23deg,#00ffdc, #ff0000c7);
+  background: linear-gradient(34deg,#00ffdc, #ff0000);
   border-radius: 15px;
   border: 2px solid white;
   box-shadow: 0px 1px 15px 2px rgb(119 37 160);
   color: white;
   height: 5vh;
   width: 22vw;
-  margin: auto;
+}
+.transpose:focus, .customize-button:focus {
+  outline: none !important;
+  transform: scale(1.15);
+  background-color: linear-gradient(25deg,#ff0000, #ff0000);
+  transition: background-color 2s;
+}
+.transpose:active {
+  background: linear-gradient(25deg,#ff0000, #ff0000);
+  transition: background-color 0s;
+}
+
+.transpose-container h3 {
+  margin: 3% 0% 3% 0%;
+}
+.customize-button {
+  background: linear-gradient(213deg,#ff00eb, #d8ff00e8);
+  border-radius: 15px;
+  border: 2px solid white;
+  box-shadow: 0px 1px 15px 2px rgb(119 37 160);
+  color: white;
+  height: 5vh;
+  width: 22vw;
 }
 li:focus {
   background: rgba(3, 250, 197, 0.616);
@@ -389,6 +407,8 @@ li:focus {
   border: 2px solid white;
   height: 7vh;
 }
+
+/* ---customize page--- */
 .SongFun {
   display: flex;
   flex-direction: column;
