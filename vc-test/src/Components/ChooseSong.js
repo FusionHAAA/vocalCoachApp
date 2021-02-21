@@ -38,7 +38,7 @@ function ChooseSong(props) {
             setTitle2(x.name)
             setAlbumArt2(x.album.images[1].url)
             setProcessSong2(x.preview_url)
-            console.log('id to be set',x.id)
+            //console.log('id to be set',x.id)
             setSongId2(x.id)
             setShowTest(()=>musion(x.id))
         }
@@ -51,7 +51,7 @@ const musion=(x)=>{
 }
 
 const showTestAudio = ()=>{
-   console.log(processSong1,processSong2,firstAnalysis,secondAnalysis)
+   //console.log(processSong1,processSong2,firstAnalysis,secondAnalysis)
     return(<TestAudio 
                         songOne = {processSong1}
                         songTwo = {processSong2}
@@ -74,12 +74,14 @@ async function getSpotifyAnalysis(id,num) {
        if(num===1){
        setFirstAnalysis({
          bpm: data.track.tempo,
-         key: data.track.key
+         key: data.track.key,
+         downBeat: data.bars[0].start
        })
      }else{
        setSecondAnalysis({
          bpm: data.track.tempo,
-         key: data.track.key
+         key: data.track.key,
+         downBeat: data.bars[0].start
           })
          }
       });
@@ -124,7 +126,9 @@ async function getSpotifyAnalysis(id,num) {
                     {/* <button className="transpose"><b>Transpose</b></button> */}
                     {showTest}
                     <h3>or</h3>
-                    <button className="customize-button">Customize</button>
+                    <button className="customize-button">
+                        <Link to="/SongFun">Customize</Link>
+                    </button>
                 </div>
                 <div className="choice-two">
                     <img src={albumArt2} alt= '' />

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import ChooseSong from './ChooseSong.js'
+import TestAudio from './TestAudio.js'
 
 function SongFun(props) {
     return (
@@ -24,7 +26,6 @@ function SongFun(props) {
                 <div className="audio-controls control-1">
                     <div className="audio-panels bpm-1">BPM control bar</div>
                     <div className="audio-panels key-1">Key control bar</div>
-                    <div className="audio-panels transpose-1">Transpose control bar</div>
                 </div>
             </div>
             <div className="customize-transpose">
@@ -32,7 +33,6 @@ function SongFun(props) {
                     play song 1
                 </div>
                 <div className="play-transposed">
-                    transpose
                 </div>
                 <div className="play-transposed-song pts-1">
                     play song 2
@@ -55,7 +55,6 @@ function SongFun(props) {
                 <div className="audio-controls control-2">
                     <div className="audio-panels bpm-control-2">BPM control bar</div>
                     <div className="audio-panels key-control-2">Key control bar</div>
-                    <div className="audio-panels transpose-control-2">Transpose control bar</div>
                 </div>
             </div>
         </div>

@@ -5,9 +5,9 @@ import token from './Token.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function SongList(props) {
-  const artistArray = ['doja cat', 'cardi b', 'dua lipa', 'sza', 'drake', 
+  const artistArray = ['doja cat', 'cardi b', 'dua lipa', 'sza',
                        'harry styles', 'doja cat', 'harry styles', 'bts',
-                       'the neighbourhood', 'deftones', 'hozier', 'juice wrld',
+                       'the neighbourhood', 'deftones', 'hozier',
                        'doja cat', 'northlane', 'spiritbox', 'travis scott',]
   const [songs, setSongs] = useState([]);
   const [song, setSong] = useState(`${artistArray[Math.floor(Math.random() * artistArray.length)]}`);
