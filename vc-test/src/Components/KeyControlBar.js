@@ -423,8 +423,9 @@ function KeyControlBar(props) {
       }
     
       const [displayKey,setDisplayKey] = useState(0)
-    
-    
+      const [clicked,setClicked]=useState(false)
+      
+     
     
       const setKey = (e) => {
         setDisplayKey(e.target.value);
@@ -484,21 +485,28 @@ function KeyControlBar(props) {
               <i className="fas fa-play-circle" 
                  id={`play-track-${props.num}`}
                  onClick={() => {
-                   if(document.querySelector('audio').paused===true){
-                     if(document.querySelector('audio').volume!==0){
+                   if(document.querySelector('audio').paused ){
+                     console.log(clicked)
+                     if(props.num===1){
+                     if(document.querySelector('audio').volume!==0 && !clicked){
                         document.querySelectorAll('canvas').forEach((each)=>each.click())
-                         }
+                        setClicked(true)
+                        }
+                     }
                    }else{
                      document.querySelectorAll('audio').volume=0;
                    }
                    if(props.num === 1){
                   if (document.getElementById('audio-track-1').paused) {
+
                       document.getElementById('audio-track-2').pause()
+                      document.getElementById('first').play()
                       document.getElementById('play-track-2').setAttribute('class', 'fas fa-play-circle')
                       document.getElementById('audio-track-1').play()
                       document.getElementById('play-track-1').setAttribute('class', 'fas fa-pause-circle')
                   }
                   else {
+                    document.getElementById('first').pause()
                       document.getElementById('audio-track-1').pause()
                       document.getElementById('play-track-1').setAttribute('class', 'fas fa-play-circle')
                   }
@@ -506,11 +514,13 @@ function KeyControlBar(props) {
                 else {
                   if (document.getElementById('audio-track-2').paused) {
                     document.getElementById('audio-track-1').pause()
+                    document.getElementById('second').play()
                     document.getElementById('play-track-1').setAttribute('class', 'fas fa-play-circle')
                     document.getElementById('audio-track-2').play()
                     document.getElementById('play-track-2').setAttribute('class', 'fas fa-pause-circle')
                   }
                   else {
+                    document.getElementById('second').pause()
                       document.getElementById('audio-track-2').pause()
                       document.getElementById('play-track-2').setAttribute('class', 'fas fa-play-circle')
                   }
