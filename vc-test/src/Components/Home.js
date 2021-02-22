@@ -8,7 +8,7 @@ import album5 from '../images/billie-eilish-album.jpg'
 import album6 from '../images/glass-animals-album.jpg'
 import album7 from '../images/harry-styles-album.jpg'
 import album8 from '../images/olivia-album.jpg'
-import album9 from '../images/harry-styles-golden.png'
+import album9 from '../images/harry-album-cover.jpg'
 import TestAudio from "./TestAudio.js";
 import chipmunks from '../assets/GoldenChipmunks.mp3'
 import dojaDog from '../assets/DojaDog.m4a'

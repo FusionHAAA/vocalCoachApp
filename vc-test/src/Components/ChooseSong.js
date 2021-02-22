@@ -28,7 +28,12 @@ function ChooseSong(props) {
 
 
     useEffect(()=>{
-        setShowTest(showTestAudio)
+        if (title1 === 'pick a song') {
+            setShowTest(pickASong)
+        }
+        else {
+            setShowTest(showTestAudio)
+        }
     },[secondAnalysis,firstAnalysis])
 
     const displayChoice = (x, num) => {
@@ -54,10 +59,14 @@ function ChooseSong(props) {
 
 const musion=(x)=>{
     return(
-        <button className="transpose" onClick={()=>getMusicAnalysis(x)}>Muse</button>
+        <button className="transpose" id="transpose" onClick={()=>getMusicAnalysis(x)}>Muse</button>
     )
 }
-
+const pickASong = () => {
+    return(
+        <button className="transpose" id="transpose">Choose</button>
+    )
+}
 const showTestAudio = ()=>{
    //console.log(processSong1,processSong2,firstAnalysis,secondAnalysis)
     return(<TestAudio 
@@ -133,7 +142,7 @@ async function getSpotifyAnalysis(id,num) {
                 <div className="transpose-container">
                     {/* <button className="transpose"><b>Transpose</b></button> */}
                     {showTest}
-                    <h4 style={{margin: '10%'}}>or</h4>
+                    <h4 style={{margin: '5%'}}>or</h4>
                     <button className="customize-button">
                         <Link to={{
                             pathname: "/SongFun",

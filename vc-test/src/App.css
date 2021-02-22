@@ -3,6 +3,18 @@
   margin: 0;
   font-family: 'Raleway', sans-serif;
 }
+@keyframes readyGlow {
+  0% {
+    box-shadow: 0px 0px 10px 3px #00ffdc;
+  }
+  50% {
+    box-shadow: 0px 0px 20x 10px #ff00f7;
+  }
+  100% {
+    box-shadow: 0px 0px 10px 3px #00ffdc;
+  }
+}
+
 html {
   background-image: linear-gradient(rgb(253, 85, 85), rgb(148, 66, 214), rgb(4, 71, 255));
   background-attachment: fixed;
@@ -43,6 +55,7 @@ nav {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  background: rgba(253, 85, 85, 0.753);
   height: 4vh;
   width: 100%;
   z-index: 1;
@@ -229,6 +242,7 @@ nav a:hover:before, nav a:hover:after {
   display: flex;
   flex-direction: column;
   height: 100%;
+  margin-bottom: 13vh;
   align-items: center;
 }
 .chooseSong h1 {
@@ -338,7 +352,7 @@ input:focus::-webkit-input-placeholder {
 .song-choices {
   display: flex;
   color: white;
-  margin-top: 3%;
+  /* margin-top: 3%; */
   width: 90%;
   justify-content: space-between;
   font-size: 12px;
@@ -387,15 +401,19 @@ input:focus::-webkit-input-placeholder {
 }
 .transpose:focus, .customize-button:focus {
   outline: none !important;
-  transform: scale(1.15);
-  background-color: linear-gradient(25deg,#ff0000, #ff0000);
-  transition: background-color 2s;
+  /* transform: scale(1.15); */
+  background-color: linear-gradient(25deg,#ff0022, #ff0000d7);
+  transition: background-color .5s
 }
 .transpose:active {
   background: linear-gradient(25deg,#ff0000, #ff0000);
-  transition: background-color 0s;
+  transition: background-color 0.5s;
 }
-
+.transpose-glow {
+  box-shadow: 0px 0px 10px 3px #00ffdc;
+  background: linear-gradient(321deg,#00adff, #ff1010fc);
+  transform: scale(1.15)
+}
 .customize-button {
   background: linear-gradient(213deg,#ff00eb, #d8ff00e8);
   border-radius: 15px;
@@ -618,3 +636,12 @@ canvas {
   background-image: url('./images/dot-wave-transparent.png');
   background-position: bottom;
 }
+.lyrics {
+  color: #ff03b1;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 12px;
+  text-shadow: 0px 0px 10px #fff, 0px 0px 20px #fff, 0px 0px 30px #e60073, 0px 0px 20px #e60073, 0px 0px 10px #e60073, 0px 0px 10px #e60073;
+}
+
+

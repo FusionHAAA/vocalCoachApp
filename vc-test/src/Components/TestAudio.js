@@ -752,6 +752,7 @@ function getPeaks(data) {
     document.getElementById('transpose').innerHTML= 'READY'
     document.getElementById('pba-two').style.animation = 'smallScale 3s infinite'
     document.getElementById('play-triangle').style.color = 'rgb(253, 85, 85)'
+    document.getElementById('transpose').style.animation = 'readyGlow 2s infinite'
     setConvertSecondSong(x)
     matchBpm()
     stopBoth()
@@ -789,7 +790,7 @@ function getPeaks(data) {
   return (
     <div id="wrapper">
       <input id="shiftAmount" type="text" defaultValue="0" style={{display:'none'}}/>
-      <button className="transpose" onClick={demonMagic} id="transpose">
+      <button className="transpose transpose-glow" onClick={demonMagic} id="transpose">
        Transpose
       </button>
       <audio id='first' src={convertFirstSong}></audio>

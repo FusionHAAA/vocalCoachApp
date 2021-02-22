@@ -60,10 +60,10 @@ const options = {
                     <div className="artist-album-pic">
                         <img src={props.location.spotifyInfo.albumArt1} alt=''/>
                     </div>
-                    <a href={`${lyrics1}`}>Lyrics</a>
+
                     <div className="artist-title-text"style={{textAlign: 'end'}}>
                         <p><b>{props.location.spotifyInfo.artist1}</b></p>
-                        <p>{props.location.spotifyInfo.title1}</p>
+                        <p><a href={`${lyrics1}`} className="lyrics lyrics-1">lyrics</a> - {props.location.spotifyInfo.title1}</p>
                         <p style={{color: 'rgb(0 255 208)'}}>{props.location.spotifyInfo.albumTitle1}</p>
                     </div>
                 </div>
@@ -100,10 +100,9 @@ const options = {
                 <div className="track-listing tr-2" style={{backgroundImage: `url(${props.location.spotifyInfo.albumArt2})`}}>
                     <div className="artist-title-text">
                         <p><b>{props.location.spotifyInfo.artist2}</b></p>
-                        <p>{props.location.spotifyInfo.title2}</p>
+                        <p>{props.location.spotifyInfo.title2} - <a href={`${lyrics2}`} className="lyrics lyrics-2">lyrics</a></p>
                         <p style={{color: 'rgb(0 255 208)'}}>{props.location.spotifyInfo.albumTitle2}</p>
                     </div>
-                    <a href={`${lyrics2}`}>Lyrics</a>
                     <div className="artist-album-pic">
                     <img src={props.location.spotifyInfo.albumArt2} />
                     </div>
