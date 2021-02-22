@@ -6,15 +6,16 @@
 html {
   background-image: linear-gradient(rgb(253, 85, 85), rgb(148, 66, 214), rgb(4, 71, 255));
   background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 100%;
   width: 100%;
 }
-
 .App {
   display: flex;
   flex-direction: column;
 }
-
 .controls {
   display:flex;
   justify-content: space-between;
