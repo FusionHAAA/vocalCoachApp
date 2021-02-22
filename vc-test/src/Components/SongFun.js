@@ -17,8 +17,8 @@ function SongFun(props) {
                 <h1>Customize Your Songs</h1>
             </div>
             <div className="customize cust-song-1">
-                <div className="audio-canvas canvas-1" id="canvas1">
-                   <AudioCanvas />
+                <div className="audio-canvas canvas-1" >
+                   <AudioCanvas num={1} />
                    
                 </div>
                 <div className="track-listing tr-1" style={{backgroundImage: `url(${props.location.spotifyInfo.albumArt1})`}}>
@@ -106,12 +106,11 @@ function SongFun(props) {
                     <img src={props.location.spotifyInfo.albumArt2} />
                     </div>
                 </div>
-                {/* <div className="audio-canvas canvas-2">
-                <Visualizer 
-                    audioPreviewUrl={props.location.spotifyInfo.processSong2}
-                    canvasHeight={60}
-                />
-                </div> */}
+                <div className="audio-canvas" >
+                <AudioCanvas num={2}/>
+                   
+                </div>
+              
             </div>
         </div>
     );

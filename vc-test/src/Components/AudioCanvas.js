@@ -1,23 +1,35 @@
 import React from 'react';
 import pavlov from '../assets/Mala Nota.mp3'
-
+import pavlov2 from '../assets/Croqueta.mp3'
 
 function AudioCanvas(props) {
    function displayCanvas(){
-        
-  
-        var audio = document.querySelector("audio");
+        var audio;
+
+        if(props.num===1){
+        audio = document.getElementById("first");
         
         audio.crossOrigin= 'anonymous'
         audio.src= pavlov
-         
+        }else{
+         audio = document.getElementById("second");
+        
+          audio.crossOrigin= 'anonymous'
+          audio.src= pavlov2
+        }
        
           var context = new AudioContext();
           var src = context.createMediaElementSource(audio);
           var analyser = context.createAnalyser();
       
-          var canvas = document.getElementById("canvas");
- 
+          var canvas;
+
+          if(props.num===1){
+          canvas = document.getElementById("canvas1");
+          }else{
+            canvas = document.getElementById("canvas2");
+          }
+          console.log(canvas)
           var ctx = canvas.getContext("2d");
       
           src.connect(analyser);
@@ -46,31 +58,53 @@ function AudioCanvas(props) {
       
             ctx.fillStyle = "#000";
             ctx.fillRect(0, 0, WIDTH, HEIGHT);
-      
+            
+            
+            
             for (var i = 0; i < bufferLength; i++) {
-              barHeight = dataArray[i]/2;
-              
+              barHeight = dataArray[i]*8;
+              if(props.num===1){
+                ///topcanvas
+              var b = barHeight + (25 * (i/bufferLength));
+              var g = 250 * (i/bufferLength);
+              var r = 50;
+              }else {
+
+                ///bottom canvas
               var r = barHeight + (25 * (i/bufferLength));
               var g = 250 * (i/bufferLength);
               var b = 50;
-      
+              }
               ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
               ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
       
               x += barWidth + 1;
             }
-          }
           
+          }
+          audio.volume=0.01
           audio.play();
           renderFrame();
         };
-      
+      const oneOrTwo=()=>{
+          if(props.num===1)
+          {
+            return (
+            <div>
+            <canvas id="canvas1" onClick={displayCanvas}></canvas>
+                <audio id='first'></audio>
+                </div>)
+          }else{
+            return (
+              <div>
+              <canvas id="canvas2" onClick={displayCanvas}></canvas>
+                  <audio id='second'></audio>
+                  </div>)
+          }
+      }
       
     return (
-             <div id="content">
-                <canvas id="canvas" onClick={displayCanvas}></canvas>
-                <audio></audio>
-              </div>
+             oneOrTwo()
     );
 }
 
