@@ -475,8 +475,10 @@ function KeyControlBar(props) {
             <div className="input-values-display">
               <p><b>{displayKey}</b></p>
               <p className='tempo_display'><b>{displayTempo}</b></p>
-            </div>
-            <button className="apply-key" onClick={demonMagic}>Apply Key</button>
+          </div>
+
+          <div className="play-and-key">
+            <button className="apply-key" onClick={demonMagic}>Key</button>
             <audio crossOrigin="anonymous" id={`audio-track-${props.num}`} playbackrate={playbackRate} ref={tempo} src={keySong}>
             </audio>
               <i className="fas fa-play-circle" 
@@ -508,6 +510,7 @@ function KeyControlBar(props) {
                 }
               }}>
               </i>
+            </div> 
           </div>
         </div>
     );

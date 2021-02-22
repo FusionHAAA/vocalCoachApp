@@ -42,7 +42,7 @@ function SongFun(props) {
         
                 </div>
                 <div className="play-transposed">
-                    <button className="transpose" id="transpose-2">Transpose</button>
+                    <button className="transpose" id="transpose-2">Muse</button>
                 </div>
                 <div className="play-transposed-song pts-2">
 
