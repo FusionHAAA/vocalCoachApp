@@ -456,7 +456,7 @@ li:focus {
 }
 .audio-canvas {
   height: 40%;
-  background: rgb(255, 74, 195);
+  background: rgb(0, 0, 0);
   border: 2px solid white;
   border-radius: 5px;
 }
@@ -490,14 +490,41 @@ li:focus {
   text-shadow: -1px 0 10px #00000063, 0 1px 10px #00000063, 1px 0 10px #00000063, 0 -1px 10px #00000063;
 }
 .audio-panels {
-  background: blue;
+  background: black;
   border: 2px solid white;
   border-radius: 5px;
-  padding: 1%;
+  padding: 3%;
+  background-image: url('./images/dot-wave-transparent.png');
+  background-size: contain;
 }
-
 canvas {
   height:100px;
   width: 333px;
   z-index: -999;
+}
+/* ---key control bar--- */
+.key_input {
+  -webkit-appearance: none;
+  width: 40%;
+  background: rgb(62, 255, 255);
+  width: 40%;
+  height: 5px;
+
+    border-radius: 10px;
+}
+.apply-key {
+  border: 2px solid white;
+  border-radius: 10px;
+  color: white;
+  background: rgb(10, 143, 121);
+  font-size: 12px;
+  height: 4vh;
+  width: 20vw;
+
+}
+.tempo_input {
+  width: 40%;
+  height: 5px;
+  background: rgb(62, 255, 255);
+  border-radius: 10px;
 }

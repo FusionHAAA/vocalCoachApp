@@ -19,7 +19,6 @@ function SongFun(props) {
             <div className="customize cust-song-1">
                 <div className="audio-canvas canvas-1" id="canvas1">
                    <AudioCanvas />
-                   
                 </div>
                 <div className="track-listing tr-1" style={{backgroundImage: `url(${props.location.spotifyInfo.albumArt1})`}}>
                     <div className="artist-album-pic">
@@ -32,12 +31,9 @@ function SongFun(props) {
                     </div>
                 </div>
                 <div className="audio-controls control-1">
-                    
-                    <div className="audio-panels key-1">
                         <KeyControlBar
                             song={props.location.spotifyInfo.processSong1}
                         />
-                    </div>
                 </div>
             </div>
             <div className="customize-transpose">
@@ -89,12 +85,9 @@ function SongFun(props) {
             </div>
             <div className="customize cust-song-2">
                 <div className="audio-controls control-2">
-                
-                    <div className="audio-panels key-control-2">
                     <KeyControlBar
                             song={props.location.spotifyInfo.processSong2}
                         />
-                    </div>
                 </div>
                 <div className="track-listing tr-2" style={{backgroundImage: `url(${props.location.spotifyInfo.albumArt2})`}}>
                     <div className="artist-title-text">
@@ -106,12 +99,13 @@ function SongFun(props) {
                     <img src={props.location.spotifyInfo.albumArt2} />
                     </div>
                 </div>
-                {/* <div className="audio-canvas canvas-2">
-                <Visualizer 
+                <div className="audio-canvas canvas-2">
+                <AudioCanvas />
+                {/* <Visualizer 
                     audioPreviewUrl={props.location.spotifyInfo.processSong2}
                     canvasHeight={60}
-                />
-                </div> */}
+                /> */}
+                </div>
             </div>
         </div>
     );

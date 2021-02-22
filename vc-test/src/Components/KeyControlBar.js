@@ -445,25 +445,23 @@ function KeyControlBar(props) {
         setDisplayTempo(e.target.value);
         };
 
-
-
-
-
-    
     return (
-        <div>
-            <audio playbackrate={playbackRate} ref={tempo}  controls src={keySong}></audio>
-            
-            <label className='key_label' htmlFor='key_input'>Pitch Shift</label>
+        <div className="audio-panels">
+            <audio playbackrate={playbackRate} ref={tempo} src={keySong}></audio>
+
+          <div className="pitch-shift-slider">
+            <label className='key_label' htmlFor='key_input'><b>Pitch Shift: </b></label>
             <input ref={keyInput} onInput={setKey} className='key_input' 
             id='key_input' type='range' defaultValue={0} min={-9} max={9} step={1}/>
             <span>{displayKey}</span>
-            <button onClick={demonMagic}>Apply Key</button>
-         
-            <label className='tempo_label' htmlFor='tempo_input'>Tempo</label>
+            <button className="apply-key" onClick={demonMagic}>Apply Key</button>
+          </div>
+
+          <div className="tempo-slider">
+            <label className='tempo_label' htmlFor='tempo_input'><b>Tempo: </b></label>
             <input ref={tempoInput} onInput={setPlayBack} className='tempo_input' id='tempo_input' type='range' defaultValue={1} min={0.5} max={2} step={0.025}/>
             <span  className='tempo_display'>{displayTempo}</span>
-           
+          </div>
         </div>
     );
 }
