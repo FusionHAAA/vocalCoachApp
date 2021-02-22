@@ -4,7 +4,10 @@ import SongList from './SongList.js'
 import TestAudio from './TestAudio.js'
 import token from './Token.js'
 import SongFun from './SongFun.js'
-
+import album9 from '../images/harry-styles-golden.png'
+import album3 from '../images/doja-album.jpg'
+import pavlov from '../assets/Mala Nota.mp3'
+import pavlov2 from '../assets/Croqueta.mp3'
  
 function ChooseSong(props) {
     let [artist1, setArtist1] = useState()
@@ -17,8 +20,8 @@ function ChooseSong(props) {
     let [albumArt2, setAlbumArt2] = useState()
     let [processSong1,setProcessSong1] = useState();
     let [processSong2,setProcessSong2] = useState();
-    let [songId1,setSongId1] = useState();
-    let [songId2,setSongId2] = useState();
+    let [songId1,setSongId1] = useState('');
+    let [songId2,setSongId2] = useState('');
     let [showTest,setShowTest] = useState();
     let [firstAnalysis,setFirstAnalysis] = useState({})
     let [secondAnalysis,setSecondAnalysis] = useState({})
@@ -176,6 +179,8 @@ async function getSpotifyAnalysis(id,num) {
                 </div>
                 <div className="play-button-animation" id="pba-two"></div>
                 <div className="song-details">
+                    <p className="song-loading-text t1">Transposing 2 songs takes time!</p>
+                    <p className="song-loading-text t2">Please wait for play button.</p>
                 </div>
             </div>
         </div>
