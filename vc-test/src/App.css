@@ -62,7 +62,7 @@ nav {
   font-size: 16px;
 }
 nav a {
-    color: rgb(118 6 175);
+    color: rgb(138, 35, 223);
     text-decoration: none;
     margin: 0px 10px;
     padding: 10px 10px;
@@ -72,7 +72,7 @@ nav a {
     cursor: pointer;
     border-bottom: 2px solid white;
 }
-nav.textIn a:before {
+nav a:before {
     position: absolute;
     color: #FFF;
     top: 0px;
@@ -84,14 +84,14 @@ nav.textIn a:before {
     transform: scale(0.8);
     opacity: 0;
 } 
-nav.textIn a:hover:before, nav.textIn a:active:before {
+nav a:hover:before, nav a:active:before {
     transform: scale(1);
     opacity: 1;
 }
-nav.textIn a {
+nav a {
   color: rgb(138, 35, 223);
 }
-nav.textIn a:before {
+nav a:before {
     transform: scale(1.2);
 } 
 /* nav a:before {
@@ -179,8 +179,8 @@ nav a:hover:before, nav a:hover:after {
 .play-button-animation {
   border-radius: 100%;
   background-color: rgb(253, 85, 85);
-  width: 20vw;
-  height: 10vh;
+  width: 16vw;
+  height: 8vh;
   z-index: 2;
   position: absolute;
 }
@@ -192,8 +192,8 @@ nav a:hover:before, nav a:hover:after {
   background-color: white;
   position: relative;
   z-index: 3;
-  width: 20vw;
-  height: 10vh;
+  width: 16vw;
+  height: 8vh;
 }
 .fa-play {
   color: rgb(4, 71, 255);
@@ -210,7 +210,7 @@ nav a:hover:before, nav a:hover:after {
   transform: translate(-50%, -50%)
 }
 .fas {
-  font-size: 10vw;
+  font-size: 8vw;
   border-radius: 100%;
 }
 .song-details {
@@ -307,7 +307,7 @@ form.search-box {
 }
 input[type=text]:focus {
   outline: none !important;
-  border: 3px solid rgb(3, 250, 196);
+  border: 3px solid #00ffdc;
   background: rgba(128, 128, 128, 0.397)
 }
 input:focus::-webkit-input-placeholder {
@@ -394,10 +394,11 @@ input:focus::-webkit-input-placeholder {
   background: linear-gradient(34deg,#00ffdc, #ff0000);
   border-radius: 15px;
   border: 2px solid white;
-  box-shadow: 0px 1px 15px 2px rgb(119 37 160);
+  box-shadow: 0px 0px 15px 7px rgb(196, 0, 245);
   color: white;
   height: 4vh;
   width: 20vw;
+  font-size: 1em;
 }
 .transpose:focus, .customize-button:focus {
   outline: none !important;
@@ -418,7 +419,7 @@ input:focus::-webkit-input-placeholder {
   background: linear-gradient(213deg,#ff00eb, #d8ff00e8);
   border-radius: 15px;
   border: 2px solid white;
-  box-shadow: 0px 1px 15px 2px rgb(119 37 160);
+  box-shadow: 0px 0px 15px 7px rgb(196, 0, 245);
   color: white;
   font-size: 1em;
   height: 4vh;
@@ -463,7 +464,7 @@ li:focus {
 
   display: flex;
   align-items: center;
-  justify-content: space-between
+  justify-content: center;
 }
 .play-transposed-song {
   width: 33%;
@@ -474,7 +475,7 @@ li:focus {
   align-items: center;
 }
 .audio-canvas {
-  background: rgb(0, 0, 0);
+  background: linear-gradient(27deg, black, #585858);
   border: 3px solid white;
   overflow: hidden;
 }
@@ -503,7 +504,7 @@ li:focus {
   object-fit: cover;
 }
 .artist-title-text p {
-  text-shadow: -1px 0 10px #00000063, 0 1px 10px #00000063, 1px 0 10px #00000063, 0 -1px 10px #00000063;
+  text-shadow: -1px 0 10px #000000b5, 0 1px 10px #000000b3, 1px 0 10px #000000bf, 0 -1px 10px #000000b5;
 }
 .audio-panels {
   border: 3px solid white;
@@ -549,6 +550,13 @@ canvas {
   height: 50%;
   margin-right: 4px;
 }
+
+.apply-key:focus {
+  outline: none !important;
+  box-shadow: 0px 0px 5px 5px rgb(1, 189, 196);
+  transform: scale(1.05);
+}
+
 .label-text {
   font-size: 15px;
 }
@@ -595,10 +603,10 @@ canvas {
   overflow: hidden;
 }
 .cust-song-1 {
-  box-shadow: 0px 5px 20px 5px #00ffc4bd;
+  box-shadow: 0px 5px 20px 7px #00ffc4bd;
 }
 .cust-song-2 {
-  box-shadow: 0px -5px 20px 5px #00ffc4bd;
+  box-shadow: 0px -5px 20px 7px #00ffc4bd;
 }
 .play-and-key {
   display: flex;
@@ -607,10 +615,22 @@ canvas {
 #play-track-1, #play-track-2 {
   font-size: 6vw;
   color: white;
+  /* box-shadow: 0px 0px 5px 5px rgb(1, 189, 196); */
+}
+#play-track-1:active, #play-track-2:active {
+  outline: none !important;
   box-shadow: 0px 0px 5px 5px rgb(1, 189, 196);
+  transform: scale(1.05);
+  transition: transform 1s;
+}
+#play-track-1:focus {
+  outline: none !important;
+  box-shadow: 0px 0px 5px 5px rgb(1, 189, 196);
+  transform: scale(1.05)
 }
 #transpose-2 {
   background: linear-gradient(328deg,#ff00f7, #ff0000e0);
+  box-shadow: 0px 0px 15px 5px rgb(133 255 0);
 }
 .song-loading-text {
   font-size: 10px;
