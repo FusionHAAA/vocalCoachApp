@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Router, Route, Link } from 'react-router-dom'
 import ChooseSong from './ChooseSong.js'
 import TestAudio from './TestAudio.js'
@@ -6,10 +6,46 @@ import SongList from './SongList.js'
 import { PinDropSharp } from '@material-ui/icons';
 import KeyControlBar from './KeyControlBar.js';
 import AudioCanvas from './AudioCanvas'
-
+import axios from "axios";
 
 function SongFun(props) {
     console.log("spotify props", props.location.spotifyInfo)
+    const [lyrics1,setLyrics1]= useState('')
+    const [lyrics2,setLyrics2]= useState('')
+    
+const options = {
+    method: 'GET',
+    url: 'https://genius.p.rapidapi.com/search',
+    params: {q: `${props.location.spotifyInfo.title1} ${props.location.spotifyInfo.artist1}`},
+    headers: {
+      'x-rapidapi-key': 'ec351e9165mshcef3af4c94a5ec8p138886jsn2f7eee2568ca',
+      'x-rapidapi-host': 'genius.p.rapidapi.com'
+    }
+  };
+  
+  axios.request(options).then(function (response) {
+     setLyrics1(response.data.response.hits[0].result.url);
+  }).catch(function (error) {
+      console.error(error);
+  });
+
+  const options1 = {
+    method: 'GET',
+    url: 'https://genius.p.rapidapi.com/search',
+    params: {q: `${props.location.spotifyInfo.title2} ${props.location.spotifyInfo.artist2}`},
+    headers: {
+      'x-rapidapi-key': 'ec351e9165mshcef3af4c94a5ec8p138886jsn2f7eee2568ca',
+      'x-rapidapi-host': 'genius.p.rapidapi.com'
+    }
+  };
+  
+  axios.request(options1).then(function (response) {
+      setLyrics2(response.data.response.hits[0].result.url)
+  }).catch(function (error) {
+      console.error(error);
+  });
+
+       
 
     return (
         <div className="SongFun">
@@ -24,6 +60,7 @@ function SongFun(props) {
                     <div className="artist-album-pic">
                         <img src={props.location.spotifyInfo.albumArt1} alt=''/>
                     </div>
+                    <a href={`${lyrics1}`}>Lyrics</a>
                     <div className="artist-title-text"style={{textAlign: 'end'}}>
                         <p><b>{props.location.spotifyInfo.artist1}</b></p>
                         <p>{props.location.spotifyInfo.title1}</p>
@@ -66,6 +103,7 @@ function SongFun(props) {
                         <p>{props.location.spotifyInfo.title2}</p>
                         <p style={{color: 'rgb(0 255 208)'}}>{props.location.spotifyInfo.albumTitle2}</p>
                     </div>
+                    <a href={`${lyrics2}`}>Lyrics</a>
                     <div className="artist-album-pic">
                     <img src={props.location.spotifyInfo.albumArt2} />
                     </div>
