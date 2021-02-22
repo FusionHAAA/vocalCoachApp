@@ -484,7 +484,14 @@ function KeyControlBar(props) {
               <i className="fas fa-play-circle" 
                  id={`play-track-${props.num}`}
                  onClick={() => {
-                   if(props.num == 1){
+                   if(document.querySelector('audio').paused===true){
+                     if(document.querySelector('audio').volume!==0){
+                        document.querySelectorAll('canvas').forEach((each)=>each.click())
+                         }
+                   }else{
+                     document.querySelectorAll('audio').volume=0;
+                   }
+                   if(props.num === 1){
                   if (document.getElementById('audio-track-1').paused) {
                       document.getElementById('audio-track-2').pause()
                       document.getElementById('play-track-2').setAttribute('class', 'fas fa-play-circle')

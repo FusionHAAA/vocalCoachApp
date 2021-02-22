@@ -64,6 +64,8 @@ function AudioCanvas(props) {
             for (var i = 0; i < bufferLength; i++) {
               barHeight = dataArray[i]*8;
               if(props.num===1){
+
+                
                 ///topcanvas
               var b = barHeight + (10 * (i/bufferLength));
               var g = 150 * (i/bufferLength);
