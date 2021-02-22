@@ -81,7 +81,14 @@ const options = {
         
                 </div>
                 <div className="play-transposed">
-                    <button className="transpose" id="transpose-2">Muse</button>
+                    <button className="transpose" id="transpose-2" onClick={()=>{
+                        if(document.getElementById('audio-track-1').paused){
+                        document.querySelectorAll('audio').forEach((each)=>each.play())
+                      
+                        }else{
+                            document.querySelectorAll('audio').forEach((each)=>each.pause())
+                        }
+                        }}>Muse</button>
                 </div>
                 <div className="play-transposed-song pts-2">
 
@@ -110,6 +117,7 @@ const options = {
                 <div className="audio-canvas">
                 <AudioCanvas num={2}/>
                 </div>
+                
             </div>
         </div>
     );

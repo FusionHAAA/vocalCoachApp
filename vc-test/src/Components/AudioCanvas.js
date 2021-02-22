@@ -1,6 +1,6 @@
 import React from 'react';
-import pavlov from '../assets/Mala Nota.mp3'
-import pavlov2 from '../assets/Croqueta.mp3'
+import pavlov from '../assets/malaNota10_1.m4a'
+import pavlov2 from '../assets/Croqueta3.m4a'
 
 function AudioCanvas(props) {
    function displayCanvas(){
@@ -62,7 +62,7 @@ function AudioCanvas(props) {
             
             
             for (var i = 0; i < bufferLength; i++) {
-              barHeight = dataArray[i]*8;
+              barHeight = dataArray[i]*3;
               if(props.num===1){
 
                 
@@ -86,7 +86,7 @@ function AudioCanvas(props) {
             }
           
           }
-          audio.volume=0.01
+          audio.volume=0.06
           audio.loop = true;
           audio.play();
           renderFrame();
@@ -96,7 +96,8 @@ function AudioCanvas(props) {
           {
             return (
             <div className="canvas-container">
-            <canvas id="canvas1" onClick={displayCanvas}></canvas>
+            <canvas id="canvas1" onClick={()=>{
+            displayCanvas()}}></canvas>
                 <audio id='first'></audio>
                 </div>)
           }else{
