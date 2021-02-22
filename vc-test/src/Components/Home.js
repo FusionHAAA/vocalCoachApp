@@ -16,7 +16,7 @@ function Home(props) {
     <div className="Home">
       <div className="hero-image">
         <div className="album-cover cover-2">
-          <img src={album8} alt="" className="album-2" />
+          <img src={album7} alt="" className="album-2" />
         </div>
         <div className="album-cover cover-1">
           <img src={album3} alt="" className="album-1" />
