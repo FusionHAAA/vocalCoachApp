@@ -79,7 +79,7 @@ function Home(props) {
             <h4>A crazy fun and unique way to discover new music!</h4>
         </div>
         <div className="border-box"></div>
-        <div className="text-box" id="hook">
+        <div className="text-box hook">
             <p>Have you ever wondered what today's pop princess would 
                sound like over your favorite track from RapCaviar?</p>
             <p>Or perhaps you'd like to hear Harry Styles belt it out over 
@@ -91,18 +91,24 @@ function Home(props) {
             </p>
         </div>
         <div className="border-box"></div>
-        <div className="text-box" id="instructions">
-            <p>Simply pick 2 songs from our varied collection of hits!</p>
-            <p>And we will transpose each of your songs keys into a high and a low, 
+        <div className="text-box hook" id="instructions">
+            <p>Simply pick 2 songs from our varied collection of hits thanks to Spotify!</p>
+            <p>And we will transpose each of your song's keys into a high and a low, 
                then sync the BBM.</p>
+            <p>Creating a beautiful and sometimes scary new song!</p>
         </div>
-      </div>  
+        <div className="border-box"></div>
+        <div className="text-box hook" id="instructions">
+          <p>Please press the play button and sample a <span style={{color: 'rgb(253, 85, 85)', fontSize: '18px'}}>
+              <b>Mused</b></span> track featuring the above artists!</p>
+        </div>
+      </div>
       <div className="example-container">
           <div className="play-button" onClick={audioFused}>
             <i id='button' className="fas fa-play"></i>
             <audio 
-             src={goldenH}   id={'fused1'}></audio>
-           
+             src={goldenH} id={'fused1'}></audio>
+
           </div>
           <div  className="play-button-animation" id="pba-one"></div>
           <div className="song-details">

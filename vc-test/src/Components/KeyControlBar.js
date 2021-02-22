@@ -446,7 +446,7 @@ function KeyControlBar(props) {
         };
 
     return (
-        <div className="audio-panels">
+        <div className="audio-panels" id={props.specificId}>
           {/* harmonizer */}
             <audio playbackrate={playbackRate} ref={tempo} src={props.song} id='duplicate'></audio>
 

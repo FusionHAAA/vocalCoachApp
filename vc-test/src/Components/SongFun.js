@@ -67,11 +67,13 @@ const options = {
                         <p style={{color: 'rgb(0 255 208)'}}>{props.location.spotifyInfo.albumTitle1}</p>
                     </div>
                 </div>
-                <div className="apbs-1">
+                <div className="bg-color">
+                    <div className="bg-wave-1">
                         <KeyControlBar
                             song={props.location.spotifyInfo.processSong1}
                             num={1}
                         />
+                    </div>
                 </div>
             </div>
             <div className="customize-transpose">
@@ -86,11 +88,14 @@ const options = {
                 </div>
             </div>
             <div className="customize cust-song-2">
-                <div className="apbs-2">
+                <div className="bg-color">
+                    <div className="bg-wave-2">
                     <KeyControlBar
                             song={props.location.spotifyInfo.processSong2}
                             num={2}
+                            specificId={'this-works'}
                         />
+                    </div>
                 </div>
                 <div className="track-listing tr-2" style={{backgroundImage: `url(${props.location.spotifyInfo.albumArt2})`}}>
                     <div className="artist-title-text">

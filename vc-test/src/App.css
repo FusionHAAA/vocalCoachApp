@@ -41,7 +41,8 @@ nav {
   position: fixed;
   display: flex;
   justify-content: space-evenly;
-  height: 6vh;
+  align-items: center;
+  height: 4vh;
   width: 100%;
   z-index: 1;
   font-size: 16px;
@@ -99,6 +100,7 @@ nav a:hover:before, nav a:hover:after {
   align-items: center;
   color: white;
   margin-top: 20%;
+  margin-bottom: 20%;
 }
 .hero-image {
   width: 90vw;
@@ -147,7 +149,7 @@ nav a:hover:before, nav a:hover:after {
 .text-box {
   margin-top: 10%;
 }
-#hook p {
+.hook p {
   margin-bottom: 4%;
 }
   /* ---play button--- */
@@ -485,12 +487,11 @@ li:focus {
   text-shadow: -1px 0 10px #00000063, 0 1px 10px #00000063, 1px 0 10px #00000063, 0 -1px 10px #00000063;
 }
 .audio-panels {
-  background: black;
   border: 3px solid white;
   padding: 3%;
   height: 6vh;
-  background-image: url('./images/dot-wave-transparent.png');
-  background-size: contain;
+  /* background-image: url('./images/dot-wave-transparent.png');
+  background-size: contain; */
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -591,4 +592,28 @@ canvas {
 }
 #transpose-2 {
   background: linear-gradient(328deg,#ff00f7, #ff0000e0);
+}
+.song-loading-text {
+  font-size: 10px;
+}
+.t1 {
+  position: absolute;
+  bottom: 1%;
+  left: 1%;
+}
+.t2 {
+  position: absolute;
+  left: 65%;
+  bottom: 1%;
+}
+.bg-color {
+  background: black
+}
+.bg-wave-1 {
+  background-image: url('./images/dot-wave-transparent.png');
+  background-position: top;
+}
+.bg-wave-2 {
+  background-image: url('./images/dot-wave-transparent.png');
+  background-position: bottom;
 }
