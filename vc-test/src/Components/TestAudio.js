@@ -616,10 +616,7 @@ function getPeaks(data) {
 
     loadTheTrack(props.songOne,1);
     loadTheTrack(props.songTwo,2);
-    
-    
 
-   
   };
 
   

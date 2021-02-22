@@ -3,19 +3,23 @@ import { Router, Route, Link } from 'react-router-dom'
 import ChooseSong from './ChooseSong.js'
 import TestAudio from './TestAudio.js'
 import SongList from './SongList.js'
+import { PinDropSharp } from '@material-ui/icons';
+import KeyControlBar from './KeyControlBar.js';
+import AudioCanvas from './AudioCanvas'
+
 
 function SongFun(props) {
     console.log("spotify props", props.location.spotifyInfo)
 
     return (
         <div className="SongFun">
-            <h1>{data}</h1>
             <div className="page-header">
                 <h1>Customize Your Songs</h1>
             </div>
             <div className="customize cust-song-1">
-                <div className="audio-canvas canvas-1">
-                    animated audio canvas
+                <div className="audio-canvas canvas-1" id="canvas1">
+                   <AudioCanvas />
+                   
                 </div>
                 <div className="track-listing tr-1" style={{backgroundImage: `url(${props.location.spotifyInfo.albumArt1})`}}>
                     <div className="artist-album-pic">
@@ -28,14 +32,18 @@ function SongFun(props) {
                     </div>
                 </div>
                 <div className="audio-controls control-1">
-                    <div className="audio-panels bpm-1">BPM control bar</div>
-                    <div className="audio-panels key-1">Key control bar</div>
+                    
+                    <div className="audio-panels key-1">
+                        <KeyControlBar
+                            song={props.location.spotifyInfo.processSong1}
+                        />
+                    </div>
                 </div>
             </div>
             <div className="customize-transpose">
                 <div className="play-transposed-song pts-1">
-                    <audio id="audio-track-1">
-                        <source src={props.location.spotifyInfo.processSong1} />
+                    <audio crossOrigin="anonymous" id="audio-track-1" src={props.location.spotifyInfo.processSong1}>
+                       
                     </audio>
                     <h6>{props.location.spotifyInfo.title1}</h6>
                     <i className="fas fa-play-circle" 
@@ -58,8 +66,8 @@ function SongFun(props) {
                     <button className="transpose" id="transpose-2">Transpose</button>
                 </div>
                 <div className="play-transposed-song pts-2">
-                    <audio id="audio-track-2">
-                        <source src={props.location.spotifyInfo.processSong2} />
+                    <audio crossOrigin="anonymous" src={props.location.spotifyInfo.processSong2} id="audio-track-2">
+                
                     </audio>
                     <i className="fas fa-play-circle" 
                        id="play-track-2"
@@ -81,11 +89,11 @@ function SongFun(props) {
             </div>
             <div className="customize cust-song-2">
                 <div className="audio-controls control-2">
-                    <div className="audio-panels bpm-control-2">
-                        BPM control bar
-                    </div>
+                
                     <div className="audio-panels key-control-2">
-                        Key control bar
+                    <KeyControlBar
+                            song={props.location.spotifyInfo.processSong2}
+                        />
                     </div>
                 </div>
                 <div className="track-listing tr-2" style={{backgroundImage: `url(${props.location.spotifyInfo.albumArt2})`}}>
@@ -98,9 +106,12 @@ function SongFun(props) {
                     <img src={props.location.spotifyInfo.albumArt2} />
                     </div>
                 </div>
-                <div className="audio-canvas canvas-2">
-                    animated audio canvas
-                </div>
+                {/* <div className="audio-canvas canvas-2">
+                <Visualizer 
+                    audioPreviewUrl={props.location.spotifyInfo.processSong2}
+                    canvasHeight={60}
+                />
+                </div> */}
             </div>
         </div>
     );
