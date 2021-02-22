@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useRef,useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import album1 from "../images/jcole-album.jpg";
 import album2 from "../images/hozier-album.jpg";
@@ -12,7 +12,7 @@ import album9 from '../images/harry-styles-golden.png'
 import TestAudio from "./TestAudio.js";
 import chipmunks from '../assets/GoldenChipmunks.mp3'
 import dojaDog from '../assets/DojaDog.m4a'
-import goldenH from '../assets/golden.mp3'
+import goldenH from '../assets/HomeScreen Mix.m4a'
 import saySo from '../assets/saySo.mp3'
 
 function Home(props) {
@@ -41,12 +41,11 @@ function Home(props) {
   }
 
   const audioFused=()=>{
+  
     if(document.getElementById('fused1').paused===true){
-      fixPlayBack()
-      document.getElementById('fused1').currentTime=0.518298
-      document.getElementById('fused2').currentTime=1.049614
+     
       document.getElementById('fused1').play()
-      document.getElementById('fused2').play()
+    
       document.getElementById('button').setAttribute('class', 'fas fa-pause')
     
     }else{
@@ -57,26 +56,17 @@ function Home(props) {
   
   const stopFuse=()=>{
     document.getElementById('fused1').pause()
-      document.getElementById('fused2').pause()
+
      
   }
 
-  const fixPlayBack=()=>{
-    audioRef.current.playbackrate=1.3
-    audioRef1.current.playbackrate=0.8966810378727754
-    audioRef2.current.playbackrate=1.1302292676772228
-  }
-  const audioRef = useRef()
-  const audioRef1= useRef()
-  const audioRef2= useRef()
 
-  
   return (
     <div className="Home">
       <div className="hero-image">
         <div className="album-cover cover-2">
           <img src={album9}  onClick={audio1} alt="" className="album-2" />
-          <audio ref={audioRef} src={chipmunks} id="golden" playbackrate={1.3}></audio>
+          <audio  src={chipmunks} id="golden" ></audio>
         </div>
         <div className="album-cover cover-1">
           <img src={album3} onClick={audio2} alt="" className="album-1" />
@@ -110,10 +100,9 @@ function Home(props) {
       <div className="example-container">
           <div className="play-button" onClick={audioFused}>
             <i id='button' className="fas fa-play"></i>
-            <audio  ref={audioRef1}
-        onCanPlay={() => fixPlayBack()} src={goldenH}   id='fused1'></audio>
-            <audio ref={audioRef2}
-        onCanPlay={() => fixPlayBack()} src={saySo}   id='fused2'></audio>
+            <audio 
+             src={goldenH}   id={'fused1'}></audio>
+           
           </div>
           <div  className="play-button-animation" id="pba-one"></div>
           <div className="song-details">
