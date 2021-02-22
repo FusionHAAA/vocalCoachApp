@@ -65,14 +65,14 @@ function AudioCanvas(props) {
               barHeight = dataArray[i]*8;
               if(props.num===1){
                 ///topcanvas
-              var b = barHeight + (25 * (i/bufferLength));
-              var g = 250 * (i/bufferLength);
+              var b = barHeight + (10 * (i/bufferLength));
+              var g = 150 * (i/bufferLength);
               var r = 50;
               }else {
 
                 ///bottom canvas
-              var r = barHeight + (25 * (i/bufferLength));
-              var g = 250 * (i/bufferLength);
+              var r = barHeight + (10 * (i/bufferLength));
+              var g = 200 * (i/bufferLength);
               var b = 50;
               }
               ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
@@ -83,6 +83,7 @@ function AudioCanvas(props) {
           
           }
           audio.volume=0.01
+          audio.loop = true;
           audio.play();
           renderFrame();
         };
@@ -90,16 +91,17 @@ function AudioCanvas(props) {
           if(props.num===1)
           {
             return (
-            <div>
+            <div className="canvas-container">
             <canvas id="canvas1" onClick={displayCanvas}></canvas>
                 <audio id='first'></audio>
                 </div>)
           }else{
             return (
-              <div>
-              <canvas id="canvas2" onClick={displayCanvas}></canvas>
+                <div className="canvas-container">
+                  <canvas id="canvas2" onClick={displayCanvas}></canvas>
                   <audio id='second'></audio>
-                  </div>)
+                </div>
+                  )
           }
       }
       

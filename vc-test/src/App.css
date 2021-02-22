@@ -33,6 +33,9 @@ html {
   flex-direction: column;
   align-items: center;
 }
+.transpose-container h3 {
+  margin: 3% 0% 3% 0%;
+}
 /* ---nav bar--- */
 nav {
   position: fixed;
@@ -390,9 +393,6 @@ input:focus::-webkit-input-placeholder {
   transition: background-color 0s;
 }
 
-.transpose-container h3 {
-  margin: 3% 0% 3% 0%;
-}
 .customize-button {
   background: linear-gradient(213deg,#ff00eb, #d8ff00e8);
   border-radius: 15px;
@@ -438,8 +438,7 @@ li:focus {
 .customize-transpose {
   background-image: url('./images/music-wave.png');
   background-size: contain;
-  border: 2px solid white;
-  width: 70%;
+  width: 100%;
   height: 10vh;
   border-radius: 5px;
   display: flex;
@@ -456,9 +455,10 @@ li:focus {
 }
 .audio-canvas {
   height: 40%;
-  background: rgb(255, 74, 195);
+  background: rgb(0, 0, 0);
   border: 2px solid white;
   border-radius: 5px;
+  overflow: hidden;
 }
 .track-listing {
   background-size: cover;
@@ -490,14 +490,91 @@ li:focus {
   text-shadow: -1px 0 10px #00000063, 0 1px 10px #00000063, 1px 0 10px #00000063, 0 -1px 10px #00000063;
 }
 .audio-panels {
-  background: blue;
+  background: black;
   border: 2px solid white;
   border-radius: 5px;
-  padding: 1%;
+  padding: 3%;
+  height: 6vh;
+  background-image: url('./images/dot-wave-transparent.png');
+  background-size: contain;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
-
 canvas {
   height:100px;
   width: 333px;
   z-index: -999;
+}
+/* ---key control bar--- */
+.ti-slider {
+  -webkit-appearance: none;
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 0px 5px 5px rgb(1, 189, 196);
+  height: 5px;
+  width: 65%;
+  border-radius: 10px;
+}
+.ti-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8px;
+  height: 15px;
+  background: linear-gradient(#ff4986, #94233fde);
+  border: 1px solid white;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.apply-key {
+  border: 2px solid white;
+  border-radius: 10px;
+  color: white;
+  background: rgb(10, 143, 121);
+  font-size: 12px;
+  width: 60%;
+  height: 50%;
+}
+.label-text {
+  font-size: 15px;
+}
+.ct-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
+}
+.apply-key-btn {
+  display: flex;
+  flex-direction: row;
+  width: 25%;
+}
+.control-text {
+  width: 20%;
+  font-size: 12px;
+}
+.pitch-shift-slider {
+  padding-bottom: 1%;
+  width: 55%;
+}
+.pitch-shift-slider p, .input-values-display p {
+  padding: 5px;
+  font-size: 13px;
+}
+.slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.input-values-display {
+  display: flex;
+  flex-direction: column;
+  color: #fd6195;
+}
+canvas {
+  width: 100%;
+  height: 100%;
+}
+.canvas-container {
+  height: 15vh;
+  overflow: hidden;
 }

@@ -445,25 +445,70 @@ function KeyControlBar(props) {
         setDisplayTempo(e.target.value);
         };
 
-
-
-
-
-    
     return (
-        <div>
-            <audio playbackrate={playbackRate} ref={tempo}  controls src={keySong}></audio>
-            
-            <label className='key_label' htmlFor='key_input'>Pitch Shift</label>
-            <input ref={keyInput} onInput={setKey} className='key_input' 
-            id='key_input' type='range' defaultValue={0} min={-9} max={9} step={1}/>
-            <span>{displayKey}</span>
-            <button onClick={demonMagic}>Apply Key</button>
-         
-            <label className='tempo_label' htmlFor='tempo_input'>Tempo</label>
-            <input ref={tempoInput} onInput={setPlayBack} className='tempo_input' id='tempo_input' type='range' defaultValue={1} min={0.5} max={2} step={0.025}/>
-            <span  className='tempo_display'>{displayTempo}</span>
-           
+        <div className="audio-panels">
+          {/* harmonizer */}
+            <audio playbackrate={playbackRate} ref={tempo} src={props.song} id='duplicate'></audio>
+
+          <div className="control-text ct-box">
+            <p><b>Pitch Shift:</b></p>
+            <p><b>Tempo:</b></p>
+          </div>
+
+          <div className="pitch-shift-slider ct-box">
+            <div className="slider-container">
+              <p>-9.0</p>
+                <label className='key_label label-text' htmlFor='key_input'></label>
+                <input ref={keyInput} onInput={setKey} className='key_input ti-slider' 
+                id='key_input' type='range' defaultValue={0} min={-9} max={9} step={1}/>
+              <p>9.0</p>
+            </div>
+            <div className="slider-container">
+              <p>0.5</p>
+                <label className='tempo_label label-text' htmlFor='tempo_input'></label>
+                <input ref={tempoInput} onInput={setPlayBack} className='tempo_input ti-slider' id='tempo_input' type='range' defaultValue={1} min={0.5} max={2} step={0.02}/>
+              <p>2.0</p>
+            </div>
+          </div>
+
+          <div className="apply-key-btn ct-box">
+            <div className="input-values-display">
+              <p><b>{displayKey}</b></p>
+              <p className='tempo_display'><b>{displayTempo}</b></p>
+            </div>
+            <button className="apply-key" onClick={demonMagic}>Apply Key</button>
+            <audio crossOrigin="anonymous" id={`audio-track-${props.num}`} playbackrate={playbackRate} ref={tempo} src={keySong}>
+            </audio>
+              <i className="fas fa-play-circle" 
+                 id={`play-track-${props.num}`}
+                 onClick={() => {
+                   if(props.num == 1){
+                  if (document.getElementById('audio-track-1').paused) {
+                      document.getElementById('audio-track-2').pause()
+                      document.getElementById('play-track-2').setAttribute('class', 'fas fa-play-circle')
+                      document.getElementById('audio-track-1').play()
+                      document.getElementById('play-track-1').setAttribute('class', 'fas fa-pause-circle')
+                  }
+                  else {
+                      document.getElementById('audio-track-1').pause()
+                      document.getElementById('play-track-1').setAttribute('class', 'fas fa-play-circle')
+                  }
+                }
+                else {
+                  if (document.getElementById('audio-track-2').paused) {
+                    document.getElementById('audio-track-1').pause()
+                    document.getElementById('play-track-1').setAttribute('class', 'fas fa-play-circle')
+                    document.getElementById('audio-track-2').play()
+                    document.getElementById('play-track-2').setAttribute('class', 'fas fa-pause-circle')
+                  }
+                  else {
+                      document.getElementById('audio-track-2').pause()
+                      document.getElementById('play-track-2').setAttribute('class', 'fas fa-play-circle')
+                  }
+                }
+              }}>
+              </i>
+          </div>
         </div>
     );
 }
