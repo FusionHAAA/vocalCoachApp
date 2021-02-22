@@ -65,14 +65,16 @@ function AudioCanvas(props) {
               barHeight = dataArray[i]*8;
               if(props.num===1){
                 ///topcanvas
-              var b = barHeight + (10 * (i/bufferLength));
-              var g = 150 * (i/bufferLength);
+                // barHeight + (10 * (i/bufferLength));
+              var b = 50 + (2 * (i/bufferLength))
+              var g = 150 * (5 * (i/bufferLength));
               var r = 50;
               }else {
 
                 ///bottom canvas
-              var r = barHeight + (10 * (i/bufferLength));
-              var g = 200 * (i/bufferLength);
+                // barHeight + (10 * (i/bufferLength));
+              var r = 50 + (2 * (i/bufferLength))
+              var g = 150 * (5 * (i/bufferLength));
               var b = 50;
               }
               ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
