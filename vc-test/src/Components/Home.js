@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef,useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import album1 from "../images/jcole-album.jpg";
 import album2 from "../images/hozier-album.jpg";
@@ -8,18 +8,69 @@ import album5 from '../images/billie-eilish-album.jpg'
 import album6 from '../images/glass-animals-album.jpg'
 import album7 from '../images/harry-styles-album.jpg'
 import album8 from '../images/olivia-album.jpg'
+import album9 from '../images/harry-styles-golden.png'
 import TestAudio from "./TestAudio.js";
-
+import chipmunks from '../assets/GoldenChipmunks.mp3'
+import dojaDog from '../assets/DojaDog.m4a'
+import goldenH from '../assets/HomeScreen Mix.m4a'
+import saySo from '../assets/saySo.mp3'
 
 function Home(props) {
+
+  const audio1=()=>{
+    
+    if(document.getElementById('golden').paused===true){
+      document.getElementById('golden').play()
+      if(document.getElementById('doja').paused===false){
+        document.getElementById('doja').pause()
+      }
+    }else{
+      document.getElementById('golden').pause()
+    }
+  }
+  const audio2=()=>{
+    
+    if(document.getElementById('doja').paused===true){
+      document.getElementById('doja').play()
+      if(document.getElementById('golden').paused===false){
+        document.getElementById('golden').pause()
+      }
+    }else{
+      document.getElementById('doja').pause()
+    }
+  }
+
+  const audioFused=()=>{
+  
+    if(document.getElementById('fused1').paused===true){
+     
+      document.getElementById('fused1').play()
+    
+      document.getElementById('button').setAttribute('class', 'fas fa-pause')
+    
+    }else{
+     stopFuse();
+      document.getElementById('button').setAttribute('class', 'fas fa-play')
+    }
+  }
+  
+  const stopFuse=()=>{
+    document.getElementById('fused1').pause()
+
+     
+  }
+
+
   return (
     <div className="Home">
       <div className="hero-image">
         <div className="album-cover cover-2">
-          <img src={album7} alt="" className="album-2" />
+          <img src={album9}  onClick={audio1} alt="" className="album-2" />
+          <audio  src={chipmunks} id="golden" ></audio>
         </div>
         <div className="album-cover cover-1">
-          <img src={album3} alt="" className="album-1" />
+          <img src={album3} onClick={audio2} alt="" className="album-1" />
+          <audio src={dojaDog} id="doja"></audio>
         </div>
       </div>
       <div className="intro-to-app">
@@ -47,10 +98,13 @@ function Home(props) {
         </div>
       </div>  
       <div className="example-container">
-          <div className="play-button">
-            <i className="fas fa-play"></i>
+          <div className="play-button" onClick={audioFused}>
+            <i id='button' className="fas fa-play"></i>
+            <audio 
+             src={goldenH}   id={'fused1'}></audio>
+           
           </div>
-          <div className="play-button-animation" id="pba-one"></div>
+          <div  className="play-button-animation" id="pba-one"></div>
           <div className="song-details">
               <h4>Check it out!</h4>
           </div>
