@@ -16,7 +16,7 @@ function NavBar(props) {
                 </Link>
             </div>
             <div className="nav-links">
-                <Link to="/SongFun" alt="Song Fun">
+                <Link to="/SongFun" alt="Customize">
                     <b>Customize</b>
                 </Link>
             </div> 
