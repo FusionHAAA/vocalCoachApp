@@ -95,18 +95,6 @@ nav a {
 nav a:before {
     transform: scale(1.2);
 } 
-/* nav a:before {
-    right: 0px;
-    top: 0px;
-}
-nav a:after {
-    left: 0px;
-    bottom: 0px;
-}
-nav a:hover:before, nav a:hover:after {
-    opacity: 1;
-    width: 100%;
-} */
 
 /* ---home page--- */
 .Home {
@@ -118,6 +106,7 @@ nav a:hover:before, nav a:hover:after {
   margin-bottom: 50px;
 }
 .hero-image {
+  margin-top: 30px;
   width: 90vw;
   height: 42vh;
   position: relative;
@@ -696,5 +685,7 @@ canvas {
     margin-top: 25px;
     margin-bottom: 25px;
   }
-
+  .track-bar {
+    height: 50px;
+  }
 }
