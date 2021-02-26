@@ -688,4 +688,15 @@ canvas {
   .container-choose {
     margin-bottom: 10px;
   }
+  .customize-transpose {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .page-header {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  .canvas-container {
+    height: 130px;
+  }
 }
