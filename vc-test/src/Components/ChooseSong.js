@@ -145,7 +145,7 @@ async function getSpotifyAnalysis(id,num) {
                     {/* <button className="transpose"><b>Transpose</b></button> */}
                     {showTest}
 
-                    <h4 style={{margin: '8px'}}>or</h4>
+                    <h4 style={{margin: '5px'}}>or</h4>
                     <button className="customize-button">
                         <Link to={{
                             pathname: "/SongFun",
