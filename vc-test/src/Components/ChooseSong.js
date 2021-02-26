@@ -117,17 +117,19 @@ async function getSpotifyAnalysis(id,num) {
     return (
         <div className="chooseSong">
             <h1>Choose Your Songs</h1>
-
             <div className="container-choose">
                 <SongList num={1}
                     displayChoice = {displayChoice}
                     id = 'song-list-one'
                     selectKey = "Pick Song #1:"
+                    inputFocus = 'input-val-one'
+                    marginList = 'margin-list'
                     />
                 <SongList num={2}
                     displayChoice = {displayChoice}
                     id = 'song-list-two'
                     selectKey = "Pick Song #2:"
+                    inputFocus = 'input-val-two'
                     />
             </div>
 
@@ -142,7 +144,8 @@ async function getSpotifyAnalysis(id,num) {
                 <div className="transpose-container">
                     {/* <button className="transpose"><b>Transpose</b></button> */}
                     {showTest}
-                    <h4 style={{margin: '5%'}}>or</h4>
+
+                    <h4 style={{margin: '8px'}}>or</h4>
                     <button className="customize-button">
                         <Link to={{
                             pathname: "/SongFun",
@@ -162,7 +165,7 @@ async function getSpotifyAnalysis(id,num) {
                     </button>
                 </div>
                 <div className="choice-two">
-                        <img src={albumArt2} alt= '' />
+                    <img src={albumArt2} alt= '' />
                     <div>
                         <p><b>{artist2}</b></p>
                         <p>{title2}</p>
@@ -188,7 +191,7 @@ async function getSpotifyAnalysis(id,num) {
                 </div>
                 <div className="play-button-animation" id="pba-two"></div>
                 <div className="song-details">
-                    <p className="song-loading-text t1">Transposing 2 songs takes time!</p>
+                    <p className="song-loading-text t1">Transposing songs takes time!</p>
                     <p className="song-loading-text t2">Please wait for play button.</p>
                 </div>
             </div>

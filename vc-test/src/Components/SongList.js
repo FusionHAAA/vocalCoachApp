@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import token from './Token.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { LocalConvenienceStoreOutlined } from "@material-ui/icons";
 
 function SongList(props) {
   const artistArray = ['doja cat', 'cardi b', 'dua lipa', 'sza',
@@ -10,16 +11,17 @@ function SongList(props) {
                        'doja cat', 'northlane', 'spiritbox', 'travis scott',]
   const [songs, setSongs] = useState([]);
   const [song, setSong] = useState(`${artistArray[Math.floor(Math.random() * artistArray.length)]}`);
-
-  const [covers, setCovers] = useState('')
   const [backgroundAlbum, setBackgroundAlbum] = useState()
   const [search, setSearch] = useState('')
-  const [playSong, setPlaySong] = useState()
+  const [footOpacity, setFootOpacity] = useState(1)
+  const [focused, setFocused] = useState()
 
+  
   useEffect(() => {
     findTheSong();
-  }, []);
-
+    document.querySelector('.example-container').style.opacity = footOpacity
+  }, [footOpacity]);
+ 
   async function findTheSong (){
     fetch(`https://api.spotify.com/v1/search?q=${song}&type=track&limit=15`, {
       headers: {
@@ -40,7 +42,8 @@ function SongList(props) {
   const findSong = (e) => {
     e.preventDefault()
     findTheSong()
-    setSearch('')
+    setSearch(`Songs by ${song}`)
+    focused.blur()
   }
 
   let albumCovers = []
@@ -92,19 +95,30 @@ function SongList(props) {
   let albumBackground = {
     backgroundImage: `url(${backgroundAlbum})`,
   }
+
   return (
-    <div>
+    <div className="choose-song-containers" id={props.marginList}>
       <div className="search-field-container">
         <h4>{props.selectKey}</h4>
         <form className="search-box" onSubmit={findSong}>
           <i className="fas fa-search" id="srch"></i>
           <input type="text" 
-                className="search" 
+                className="search"
+                id={props.inputFocus}
+                autoComplete="off"
                 value={search}
                 placeholder= 'Find favorite artist'
                 onChange={(e) => {
                   setSong(e.target.value)
                   setSearch(e.target.value)}}
+                onFocus={(e) => {
+                  setSearch('')
+                  setFocused(e.target)
+                  setFootOpacity(0)
+                }}
+                onBlur={() => {
+                  setFootOpacity(1)
+                }}
                 />
         </form>
       </div>
