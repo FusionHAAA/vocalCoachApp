@@ -249,6 +249,11 @@ nav a:before {
   margin-top: 20px;
   margin-bottom: 15px;
 }
+.flexDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .container-choose {
   display: flex;
   /* justify-content: space-between; */
@@ -745,9 +750,9 @@ canvas {
     margin-bottom: 30px;
   }
   .flexDiv {
-    display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: unset;
   }
   .customize-transpose {
     position: absolute;
