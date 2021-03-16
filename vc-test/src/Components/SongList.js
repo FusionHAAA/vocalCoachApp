@@ -32,6 +32,7 @@ function SongList(props) {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         // console.log(data)
         setSongs(data.tracks.items)
         setBackgroundAlbum(data.tracks.items[0].album.images[0].url)

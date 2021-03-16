@@ -103,7 +103,23 @@ function getPeaks(data) {
 
       
    
+      const experimentShift=()=>{
+        let diff = props.songIdOne.key-props.songIdTwo.key
+        
+        if(Math.abs(diff)>=7)
+        {
+          if(diff>0)
+          {
+            shiftFactor2= diff-12
+          }else{
+            shiftFactor2= diff+12
+          }
 
+        }else{
+          shiftFactor2 = diff
+        }
+
+      }
 
    const getDesiredKey=()=>
     {
@@ -138,8 +154,8 @@ function getPeaks(data) {
       
     }
   
-      getDesiredKey()
- 
+      //getDesiredKey()
+      experimentShift();
    
  
       
@@ -287,7 +303,7 @@ function getPeaks(data) {
                 shiftFactor=shiftFactor1
               }else{
                 shiftFactor=shiftFactor2
-              }
+              
               let shiftAmount = Math.pow(Math.pow(2, 1 / 12), shiftFactor);
               console.log(shiftAmount)
               in_data_l = PitchShift(
@@ -316,7 +332,7 @@ function getPeaks(data) {
               
               decodedData.copyToChannel(in_data_r, 1);
               console.log(4)
-
+              }
 
               ////////Code for EQ//////////
 

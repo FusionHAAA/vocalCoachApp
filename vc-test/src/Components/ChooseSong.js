@@ -8,8 +8,14 @@ import album9 from '../images/harry-styles-golden.png'
 import album3 from '../images/doja-album.jpg'
 import pavlov from '../assets/Mala Nota.mp3'
 import pavlov2 from '../assets/Croqueta.mp3'
+import TheContext from '../TheContext'
  
 function ChooseSong(props) {
+
+    const { userChoice1, setUserChoice1, userChoice2, setUserChoice2 } = React.useContext(
+        TheContext
+      );
+
     let [artist1, setArtist1] = useState()
     let [title1, setTitle1] = useState('pick a song')
     let [albumTitle1, setAlbumTitle1] = useState()
@@ -33,7 +39,9 @@ function ChooseSong(props) {
         }
         else {
             setShowTest(showTestAudio)
+           
         }
+        
     },[secondAnalysis,firstAnalysis])
 
     const displayChoice = (x, num) => {
@@ -51,11 +59,16 @@ function ChooseSong(props) {
             setAlbumTitle2(x.album.name)
             setAlbumArt2(x.album.images[1].url)
             setProcessSong2(x.preview_url)
-            //console.log('id to be set',x.id)
             setSongId2(x.id)
             setShowTest(()=>musion(x.id))
+            
         }
       }
+
+      useEffect(()=>{
+        setUserChoice2({artist2,title2,albumTitle2,albumArt2,processSong2,songId2})
+      },[songId2])
+
 
 const musion=(x)=>{
     return(
@@ -114,10 +127,17 @@ async function getSpotifyAnalysis(id,num) {
     
   }
       
+  const updateGlobal=()=>{
+    console.log('update global')
+    setUserChoice1({artist1,title1,albumTitle1,albumArt1,processSong1,songId1})
+   
+}
+
+
     return (
         <div className="chooseSong">
             <h1>Choose Your Songs</h1>
-            <div className="container-choose">
+            <div onClick={updateGlobal} className="container-choose">
                 <SongList num={1}
                     displayChoice = {displayChoice}
                     id = 'song-list-one'

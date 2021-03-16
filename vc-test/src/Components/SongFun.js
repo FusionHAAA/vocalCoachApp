@@ -12,11 +12,23 @@ function SongFun(props) {
     console.log("spotify props", props.location.spotifyInfo)
     const [lyrics1,setLyrics1]= useState('')
     const [lyrics2,setLyrics2]= useState('')
+
+const handleUndefined = (x)=>{
+    if(props.location.spotifyInfo===null)
+    {
+        return 'pick a song'
+    }
+    else{
+        return x
+    }
+}
     
+console.log(props)
+
 const options = {
     method: 'GET',
     url: 'https://genius.p.rapidapi.com/search',
-    params: {q: `${props.location.spotifyInfo.title1} ${props.location.spotifyInfo.artist1}`},
+    params: {q: `${handleUndefined(props.location.spotifyInfo.title1)} ${handleUndefined(props.location.spotifyInfo.artist1)}`},
     headers: {
       'x-rapidapi-key': 'ec351e9165mshcef3af4c94a5ec8p138886jsn2f7eee2568ca',
       'x-rapidapi-host': 'genius.p.rapidapi.com'
