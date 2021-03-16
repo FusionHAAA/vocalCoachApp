@@ -95,7 +95,6 @@ nav a {
 nav a:before {
     transform: scale(1.2);
 } 
-
 /* ---home page--- */
 .Home {
   display: flex;
@@ -249,6 +248,11 @@ nav a:before {
   color: white;
   margin-top: 20px;
   margin-bottom: 15px;
+}
+.flexDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .container-choose {
   display: flex;
@@ -618,7 +622,6 @@ canvas {
   align-items: center;
 }
 #play-track-1, #play-track-2 {
-  font-size: 6vw;
   color: white;
   /* box-shadow: 0px 0px 5px 5px rgb(1, 189, 196); */
 }
@@ -687,5 +690,96 @@ canvas {
   }
   .track-bar {
     height: 50px;
+  }
+}
+@media screen and (min-width: 1040px) {
+  .App {
+    align-items: center;
+    margin: auto;
+    width: 880px;
+  }
+  .hero-image {
+    width: 100%;
+    height: 60vh;
+  }
+  .album-cover {
+    width: 50%;
+    height: 300px;
+  }
+  .cover-1 {
+    right: 5%;
+  }
+  .cover-2 {
+   left: 5%;
+  }
+  .text-box {
+    width: 100%;
+  }
+  nav {
+    height: 40px;
+  }
+  nav a {
+    padding: 10px 5px;
+  }
+  nav a:before {
+    padding: 10px 5px;
+  }
+  .choose-song-list {
+    width: 400px;
+    height: 300px;
+    background-size: contain;
+  }
+  .search-field-container {
+    padding-bottom: 20px;
+  }
+  .search {
+    width: 250px;
+  }
+  .container-choose {
+    flex-direction: row;
+  }
+  .song-choices {
+    width: 100%;
+    margin-top: 0px;
+  }
+  #margin-list {
+    margin-right: 100px;
+  }
+  .chooseSong h1 {
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+  .flexDiv {
+    flex-direction: row;
+    justify-content: center;
+    align-items: unset;
+  }
+  .customize-transpose {
+    position: absolute;
+    width: 100%;
+    height: 12vh;
+  }
+  .page-header {
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  .customize {
+    margin-top: 15%;
+  }
+  .cust-song-1 {
+    margin-right: 100px;
+  }
+  .cust-song-2 {
+    flex-direction: column-reverse;
+  }
+  .artist-album-pic {
+    height: 80px;
+    width: 80px;
+  }
+  .canvas-container {
+    height: 160px;
+  }
+  .example-container {
+    opacity: 1 !important
   }
 }

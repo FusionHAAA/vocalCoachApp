@@ -16,7 +16,6 @@ function SongList(props) {
   const [footOpacity, setFootOpacity] = useState(1)
   const [focused, setFocused] = useState()
 
-  
   useEffect(() => {
     findTheSong();
     document.querySelector('.example-container').style.opacity = footOpacity

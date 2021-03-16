@@ -21,22 +21,28 @@ function Home(props) {
     
     if(document.getElementById('golden').paused===true){
       document.getElementById('golden').play()
+      document.querySelector('.cover-1').style.boxShadow = "none"
+      document.querySelector('.cover-2').style.boxShadow = "0px 0px 20px 7px rgb(38 255 235)"
       if(document.getElementById('doja').paused===false){
         document.getElementById('doja').pause()
       }
     }else{
       document.getElementById('golden').pause()
+      document.querySelector('.cover-2').style.boxShadow = "none"
     }
   }
   const audio2=()=>{
     
     if(document.getElementById('doja').paused===true){
       document.getElementById('doja').play()
+      document.querySelector('.cover-2').style.boxShadow = "none"
+      document.querySelector('.cover-1').style.boxShadow = "0px 0px 20px 7px rgb(38 255 235)"
       if(document.getElementById('golden').paused===false){
         document.getElementById('golden').pause()
       }
     }else{
       document.getElementById('doja').pause()
+      document.querySelector('.cover-1').style.boxShadow = "none"
     }
   }
 

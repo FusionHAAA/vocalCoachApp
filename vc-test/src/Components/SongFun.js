@@ -64,6 +64,7 @@ const options = {
             <div className="page-header">
                 <h1>Customize Your Muse</h1>
             </div>
+            <div className="flexDiv">
             <div className="customize cust-song-1">
                 <div className="audio-canvas canvas-1" >
                    <AudioCanvas num={1} />
@@ -123,7 +124,7 @@ const options = {
                 <div className="audio-canvas">
                 <AudioCanvas num={2}/>
                 </div>
-                
+            </div>
             </div>
         </div>
     );
