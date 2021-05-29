@@ -14,6 +14,7 @@ import chipmunks from '../assets/GoldenChipmunks.mp3'
 import dojaDog from '../assets/DojaDog.m4a'
 import goldenH from '../assets/HomeScreen Mix.m4a'
 import saySo from '../assets/saySo.mp3'
+import InfoButton from './InfoButton'
 
 function Home(props) {
 
@@ -74,6 +75,7 @@ function Home(props) {
           <img src={album9}  onClick={audio1} alt="" className="album-2" />
           <audio  src={chipmunks} id="golden" ></audio>
         </div>
+        <InfoButton/>
         <div className="album-cover cover-1">
           <img src={album3} onClick={audio2} alt="" className="album-1" />
           <audio src={dojaDog} id="doja"></audio>
